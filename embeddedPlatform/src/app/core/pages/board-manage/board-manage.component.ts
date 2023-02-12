@@ -35,7 +35,8 @@ export class BoardManageComponent implements OnInit {
             .from('boards')
             .select();
         this.boards = data;
-        const jsonObject = this.boards[0];
+        console.log(this.boards[0].template);
+        const jsonObject = this.boards[0].template;
         for(const key in jsonObject){
             if(jsonObject.hasOwnProperty(key)){
                 this.fields.push({name: key, label: key, value: jsonObject[key]});

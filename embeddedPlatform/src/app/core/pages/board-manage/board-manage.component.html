@@ -1,4 +1,4 @@
-<h1 class="mb-3 pb-2 border-bottom border-light text-primary">Fill template</h1>
+<h1 class="mb-3 pb-2 border-bottom border-light text-primary">Fill template {{ boards[0].name }}</h1>
 <form (ngSubmit)="submitForm()">
     <ng-container *ngFor="let field of fields">
         <div class="form-group">
