@@ -20,5 +20,13 @@ export class ApiService {
         .from('boards')
         .select(name)
     }
+
+    async getTemplates(){
+
+    }
+
+    async uploadFirmware(){
+        
+    }
 }
 
