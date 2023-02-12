@@ -1,0 +1,58 @@
+/* You can add global styles to this file, and also import other style files */
+// :root {
+//     --blue: #007bff;
+//     --indigo: #6610f2;
+//     --purple: #6f42c1;
+//     --pink: #e83e8c;
+//     --red: #dc3545;
+//     --orange: #fd7e14;
+//     --yellow: #ffc107;
+//     --green: #28a745;
+//     --teal: #20c997;
+//     --cyan: #17a2b8;
+//     --white: #fff;
+//     --gray: #6c757d;
+//     --gray-dark: #343a40;
+//     --primary: #a92e2d;
+//     --secondary: #6c757d;
+//     --success: #28a745;
+//     --info: #17a2b8;
+//     --warning: #ffc107;
+//     --danger: #dc3545;
+//     --light: #f8f9fa;
+//     --dark: #343a40;
+//     --breakpoint-xs: 0;
+//     --breakpoint-sm: 576px;
+//     --breakpoint-md: 768px;
+//     --breakpoint-lg: 992px;
+//     --breakpoint-xl: 1200px;
+//     --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+//     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+//   }
+
+$primary: #37536b;
+$secondary: #575858;
+$info: #17a2b8;
+$success: #28a745;
+$warning: #ffc107;
+$danger: #dc3545;
+$light: #f4f5f8;
+$dark: #333333;
+
+.toast-success {
+    background-color: #28a745;
+}
+
+.toast-error {
+    background-color: #dc3545;
+}
+
+.toast-info {
+    background-color: #17a2b8;
+}
+
+.toast-warning {
+    background-color: #ffc107;
+}
+
+@import '../node_modules/bootstrap/scss/bootstrap.scss';

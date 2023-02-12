@@ -1,0 +1,25 @@
+footer .logo {
+    margin-top: 15px;
+}
+
+footer .text {
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+footer .links {
+    list-style: none;
+    padding-left: 0px;
+    line-height: 30px;
+    margin-top: 15px;
+    font-size: 0.9em;
+}
+
+footer .switchCulture{
+    margin-top: 20px;
+    height: 25px;
+    a {
+      text-decoration: underline;  
+      cursor: pointer;
+    }
+}

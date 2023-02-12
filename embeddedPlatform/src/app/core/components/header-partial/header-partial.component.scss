@@ -1,0 +1,22 @@
+header .top .logo {
+    padding-top: 5px;
+    height: 105px;
+}
+
+.unitn-header {
+    background-color: var(--primary); 
+    color: #ffffff;
+    height: 75px;
+}
+
+.unitn-header-logo {
+    float: left;
+    padding: 10px 0px;
+    img {
+        height:auto;
+    }
+}
+
+#pageMenu {
+    margin-bottom: 15px;
+}
