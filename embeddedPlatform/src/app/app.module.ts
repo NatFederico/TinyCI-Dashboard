@@ -24,9 +24,6 @@ import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontaweso
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { HttpHeaderInterceptor } from './core/interceptors/http-header.interceptor';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { CallbackPageComponent } from './core/pages/callback-page/callback-page.component';
-import { SilentPageComponent } from './core/pages/silent-page/silent-page.component';
-import { EndSessionPageComponent } from './core/pages/end-session-page/end-session-page.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgPipesModule } from 'ngx-pipes';
 import { HttpRetryInterceptor } from './core/interceptors/http-retry.interceptor';
@@ -57,9 +54,6 @@ if (environment.production) {
     AppComponent,
     HeaderPartialComponent,
     FooterPartialComponent,
-    CallbackPageComponent,
-    SilentPageComponent,
-    EndSessionPageComponent
   ],
   imports: [
     BrowserModule,
