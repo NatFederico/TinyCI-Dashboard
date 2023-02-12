@@ -1,1 +1,12 @@
-<p>board-manage works!</p>
+<h1 class="mb-3 pb-2 border-bottom border-light text-primary">Fill template</h1>
+
+<form (ngSubmit)="submitForm()">
+    <ng-container *ngFor="let field of fields">
+        <div class="form-group">
+            <label [attr.for]="field.name">{{ field.name }}:</label>
+            <input [type]="field.type" class="form-control" [id]="field.name" [(ngModel)]="field.value"
+                [name]="field.name">
+        </div>
+    </ng-container>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
