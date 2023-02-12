@@ -12,15 +12,15 @@ const routes: Routes = [
     },
     {
         path: 'template',
-        loadChildren: () => import('../features/board/pages/board-setup/board-setup.module').then( m => m.BoardSetupModule),
+        loadChildren: () => import('./pages/board-setup/board-setup.module').then( m => m.BoardSetupModule),
     },
     {
         path: 'manage',
-        loadChildren: () => import('../features/board/pages/board-manage/board-manage.module').then( m => m.BoardManageModule),
+        loadChildren: () => import('./pages/board-manage/board-manage.module').then( m => m.BoardManageModule),
     },
     {
         path: 'firmware',
-        loadChildren: () => import('../features/board/pages/board-firmware/board-firmware.module').then( m => m.BoardFirmwareModule),
+        loadChildren: () => import('./pages/board-firmware/board-firmware.module').then( m => m.BoardFirmwareModule),
     }
 ];
 

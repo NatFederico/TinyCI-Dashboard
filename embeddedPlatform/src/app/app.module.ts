@@ -30,7 +30,7 @@ import { EndSessionPageComponent } from './core/pages/end-session-page/end-sessi
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgPipesModule } from 'ngx-pipes';
 import { HttpRetryInterceptor } from './core/interceptors/http-retry.interceptor';
-import { BoardSetupComponent } from './features/board/pages/board-setup/board-setup.component';
+import { BoardSetupComponent } from './core/pages/board-setup/board-setup.component';
 
 defineLocale('it', itLocale);
 defineLocale('en', enGbLocale);
