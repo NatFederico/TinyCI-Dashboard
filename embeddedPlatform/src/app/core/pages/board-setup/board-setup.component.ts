@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { SupabaseClient, createClient } from '@supabase/supabase-js';
 import { initSupabase } from 'src/app/utils/initSupabase';
 
 @Component({
@@ -12,15 +13,18 @@ export class BoardSetupComponent {
     name: '',
     jsonData: ''
   };
+  supabase: SupabaseClient = createClient(initSupabase.supabaseUrl, initSupabase.supabaseKey);
+  success = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  submitForm() {
-    const url = initSupabase.supabaseUrl+'/rest/boards';
-    this.http.post(url, this.board.jsonData)
-      .subscribe(response => {
-        console.log(response);
-      });
+  async submitForm() {
+    const { data, error } = await this.supabase
+      .from('boards')
+      .insert([
+        { name: this.board.name, template: this.board.jsonData },
+      ]);
+      this.success = true;
   }
 
   uploadFile(event) {

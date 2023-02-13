@@ -18,17 +18,15 @@ export class BoardManageComponent implements OnInit {
         template: JSON;
     }[]
     supabase: SupabaseClient = createClient(initSupabase.supabaseUrl, initSupabase.supabaseKey);
-    // client;
+    client;
 
 
     constructor(private http: HttpClient, private api: ApiService) { }
 
     ngOnInit() {
         this.getFields();
-        // this.connectToMQTT();
+        this.connectToMQTT();
     }
-
-
 
     async getFields() {
         const { data, error } = await this.supabase
@@ -44,25 +42,22 @@ export class BoardManageComponent implements OnInit {
         }
     }
 
-    // connectToMQTT() {
-    //     const options: IClientOptions = {
-    //         host: '{your_mqtt_broker_host}',
-    //         port: '{your_mqtt_broker_port}',
-    //         username: '{your_mqtt_broker_username}',
-    //         password: '{your_mqtt_broker_password}',
-    //         clientId: '{your_mqtt_client_id}'
-    //     };
-
-    //     this.client = new MQTT.Client(options);
-    //     this.client.connect();
-    // }
+    connectToMQTT() {
+         const options: IClientOptions = {
+              host: '54.93.59.205',
+              port: '8883',
+              clientId: 'dashboard'
+          };
+          this.client = new MQTT.Client(options);
+          this.client.connect();
+     }
 
     submitForm() {
-        const payload = JSON.stringify(this.fields.reduce((acc, field) => {
-            acc[field.name] = field.value;
-            return acc;
-        }, {}));
+         const payload = JSON.stringify(this.fields.reduce((acc, field) => {
+             acc[field.name] = field.value;
+             return acc;
+         }, {}));
 
-        // this.client.publish('{your_mqtt_topic}', payload);
+        this.client.publish(this.boards[0].name, payload);
     }
 }
