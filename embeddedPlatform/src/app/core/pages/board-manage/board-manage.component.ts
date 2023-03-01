@@ -17,7 +17,7 @@ export class BoardManageComponent implements OnInit {
         name: string;
         template: JSON;
     }[]
-    supabase: SupabaseClient = createClient(initSupabase.supabaseUrl, initSupabase.supabaseKey);
+    supabase: SupabaseClient = createClient(initSupabase.supabaseUrl, initSupabase.supabaseKey); //Supabase instance connection
     client;
 
 
@@ -44,8 +44,8 @@ export class BoardManageComponent implements OnInit {
 
     connectToMQTT() {
          const options: IClientOptions = {
-              host: '54.93.59.205',
-              port: '8883',
+              host: '54.93.59.205', //Insert IP provided by AWS
+              port: '1883', //deafult port for MQTT comm.
               clientId: 'dashboard'
           };
           this.client = new MQTT.Client(options);

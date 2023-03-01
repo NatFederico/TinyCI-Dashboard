@@ -13,6 +13,8 @@ Let's look more in depth to each one of these and the technologies they're runni
 
 ### MQTT Broker
 
+
+
 ### Dashboard
 
 ### OTA
