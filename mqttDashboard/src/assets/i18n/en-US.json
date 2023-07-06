@@ -1,0 +1,60 @@
+{
+    "APP": {
+        "NOME": "mqttDashboard"
+    },
+    "APP_TS": {
+        "SESSIONE_TERMINATA_TITLE": "Session closed",
+        "SESSIONE_TERMINATA_MESSAGE": "The user session is no longer active"
+    },
+    "MENU": {
+        "ACCEDI": "Login",
+        "HOME": "Home",
+        "LOGOUT": "Logout"
+    },
+    "HEADER": {
+        "LOGO_TITLE": "Università degli Studi di Trento",
+        "LOGO_LINK": "https://www.unitn.it",
+        "CULTURE_IT": "italiano (Italia)",
+        "CULTURE_EN": "English (United States)"
+    },
+    "FOOTER": {
+        "LOGO_TITLE": "University of Trento",
+        "PORTALE_LINK": "https://www.unitn.it/en",
+        "PRIVACY_LINK": "https://www.unitn.it/en/privacy",
+        "CASE_LINK": "https://icts.unitn.it/case/en",
+        "HELPDESK_LINK": "https://www.unitn.it/en/servicedesk/support",
+        "PORTALE_TEXT": "Unitn.it",
+        "PRIVACY_TEXT": "Privacy",
+        "CASE_TEXT": "ICT Services Catalog",
+        "HELPDESK_TEXT": "Helpdesk",
+        "SWITCHITA_TITLE": "Passa a versione italiana",
+        "SWITCHENG_TITLE": "Switch to English version"
+    },
+    "GUARD": {
+        "CORE": {
+            "USER": {
+                "NO_AUTHORIZATION_TITLE": "Warning",
+                "NO_AUTHORIZATION_MESSAGE": "You're not authorized"
+            }
+        }
+    },
+    "PAGE": {
+        "CORE": {
+            "WELCOME": {
+                "TITOLO": "Template",
+                "INTRO": "This is a SPA template"
+            }
+        },        
+        "USER": {
+            "HOME": {
+                "TITOLO": "User HomePage"
+            },            
+            "PAGE1": {
+                "TITOLO": "User Pagina1"
+            },            
+            "PAGE2": {
+                "TITOLO": "User Pagina2"
+            }
+        }
+    }
+}

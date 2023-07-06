@@ -1,0 +1,24 @@
+<h1 class="mb-3 pb-2 border-bottom border-light text-primary">Firmware update</h1>
+<form (ngSubmit)="submitForm()">
+    <div class="row">
+         <div class="form-group col-md-6">
+            <label for="boardName">Board Name:</label>
+            <input type="text" class="form-control" placeholder="Board name" [(ngModel)]="name"
+                [ngModelOptions]="{standalone: true}" />
+        </div>
+        <div class="form-group col-md-6">
+            <label for="jsonFile">JSON File:</label>
+            <input type="file" class="form-control" id="jsonFile" (change)="uploadFile($event)" accept=".json">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="form-group">
+            <label for="jsonData">Preview data:</label>
+            <textarea class="form-control" id="jsonData" rows="5" readonly>{{ firmwareText }}</textarea>
+        </div>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <br>
+</form>

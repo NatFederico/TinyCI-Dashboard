@@ -1,0 +1,26 @@
+<h1 class="mb-3 pb-2 border-bottom border-light text-primary">Choose board</h1>
+{{firmware | json}}
+<table class="table table-striped" *ngIf="boards.length > 0">
+    <tbody>
+        <tr *ngFor="let board of boards">
+            <td>
+                {{board.name}}
+            </td>
+            <td align="right">
+                <button class="btn btn-primary" (click)="selectBoard(board)">Setup</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h3 *ngIf="boards.length == 0">No board registered to user</h3>
+<div *ngIf="loaded">
+    <h3 class="mb-3 pb-2 border-bottom border-light text-primary">{{board.name}}</h3>
+    <div *ngFor="let field of names; let i = index;">
+            <label [attr.for]="field">{{ field | titlecase }}:</label>
+            <input type="number" class="form-control" [(ngModel)]="val[i]">
+    </div>
+    <br>
+    <button (click)="send()" class="btn btn-primary">Submit</button>
+    <br>
+</div>
+<button (click)="send()" class="btn btn-primary">Submit</button>

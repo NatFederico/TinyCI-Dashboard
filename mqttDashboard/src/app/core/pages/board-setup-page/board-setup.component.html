@@ -1,0 +1,21 @@
+<h1 class="mb-3 pb-2 border-bottom border-light text-primary">Add new board</h1>
+<table class="table table-striped" *ngIf="boards.length > 0">
+    <tbody>
+        <tr *ngFor="let board of boards">
+            <td>
+                {{board.name}}
+            </td>
+            <td align="right">
+                <button class="btn btn-primary" (click)="submitForm(board)">Setup</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h3 *ngIf="boards.length == 0">No boards communicating in your current mqtt server</h3>
+<div *ngIf="success">
+    <h3>New board added</h3>
+    <div class="btn-group">
+        <button type="button" class="btn btn-sm btn-primary" [routerLink]="['/dashboard']">Go back to the dashboard <fa-icon
+                icon="table-columns"></fa-icon></button>
+    </div>
+</div>
