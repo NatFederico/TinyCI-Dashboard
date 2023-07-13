@@ -36,6 +36,7 @@
     "moment": "2.29.1",
     "mqtt": "^4.3.7",
     "ngx-bootstrap": "8.0.0",
+    "ngx-graph": "^0.9.1",
     "ngx-moment": "6.0.2",
     "ngx-pipes": "3.0.0",
     "ngx-toastr": "14.2.1",

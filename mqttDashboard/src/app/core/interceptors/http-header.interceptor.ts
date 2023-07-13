@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
 import { select, Store } from '@ngrx/store';
 import { AuthState } from '../store/reducers/auth.reducer';
-import * as fromAuthSelectors from '../../core/store/selectors/auth.selectors';
+import * as fromAuthSelectors from '../store/selectors/auth.selectors';
 import { User } from 'oidc-client';
 import { filter } from 'rxjs/operators';
 

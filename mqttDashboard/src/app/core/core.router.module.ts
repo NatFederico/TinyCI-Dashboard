@@ -17,7 +17,11 @@ const routes: Routes = [
     {
         path: 'firmware',
         loadChildren: () => import('./pages/board-firmware-page/board-firmware.module').then( m => m.BoardFirmwareModule),
-    }
+    },
+    {
+        path: 'live',
+        loadChildren: () => import('./pages/live-data-page/live-data-page.module').then( m => m.LiveDataPageModule),
+    },
 ];
 
 @NgModule({

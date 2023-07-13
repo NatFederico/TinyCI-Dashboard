@@ -60,6 +60,7 @@ export class BoardManageComponent implements OnInit, OnDestroy {
     }
 
     selectBoard(board: Board) {
+        this.fields = [];
         this.board = board;
         find(this.firmware, (value) => {
             if (value.name == this.board.name) {
@@ -77,6 +78,7 @@ export class BoardManageComponent implements OnInit, OnDestroy {
     }
 
     Names(){
+        this.names = [];
         forEach(this.fields, (value) => {
             this.names.push(Object.keys(value)[0]);
         });

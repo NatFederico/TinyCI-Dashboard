@@ -1,5 +1,4 @@
 <h1 class="mb-3 pb-2 border-bottom border-light text-primary">Choose board</h1>
-{{firmware | json}}
 <table class="table table-striped" *ngIf="boards.length > 0">
     <tbody>
         <tr *ngFor="let board of boards">
@@ -23,4 +22,3 @@
     <button (click)="send()" class="btn btn-primary">Submit</button>
     <br>
 </div>
-<button (click)="send()" class="btn btn-primary">Submit</button>

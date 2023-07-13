@@ -61,7 +61,7 @@ if (environment.production) {
     BrowserAnimationsModule,
     HttpClientModule,
     FontAwesomeModule,
-    ModalModule.forRoot(),
+    NgxDatatableModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-bottom-right',
