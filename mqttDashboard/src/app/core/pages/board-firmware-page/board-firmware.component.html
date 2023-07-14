@@ -1,5 +1,15 @@
-<h1 class="mb-3 pb-2 border-bottom border-light text-primary">Firmware update</h1>
-<form (ngSubmit)="submitForm()">
+<div class="row mb-3 pb-2 border-bottom border-light">
+    <div class="col-md-10">
+        <h1 class="text-primary">Firmware Update</h1>
+    </div>
+    <div class="col-md">
+        <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-primary" [routerLink]="['/dashboard']">Back to dashboard
+                <fa-icon icon="table-columns"></fa-icon></button>
+        </div>
+    </div>
+</div>
+<form (ngSubmit)="submitForm()" *ngIf="!success">
     <div class="row">
          <div class="form-group col-md-6">
             <label for="boardName">Board Name:</label>
@@ -22,3 +32,10 @@
     <button type="submit" class="btn btn-primary">Submit</button>
     <br>
 </form>
+<div *ngIf="success">
+    <h3>Firmware updated</h3>
+    <div class="btn-group">
+        <button type="button" class="btn btn-sm btn-primary" [routerLink]="['/dashboard']">Go back to the dashboard
+            <fa-icon icon="table-columns"></fa-icon></button>
+    </div>
+</div>

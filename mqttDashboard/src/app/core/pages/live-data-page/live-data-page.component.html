@@ -1,9 +1,22 @@
-<h1 class="mb-3 pb-2 border-bottom border-light text-primary">Choose board</h1>
+<div class="row mb-3 pb-2 border-bottom border-light">
+    <div class="col-md-10">
+        <h1 class="text-primary">Live Data</h1>
+    </div>
+    <div class="col-md">
+        <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-primary" [routerLink]="['/dashboard']">Back to dashboard
+                <fa-icon icon="table-columns"></fa-icon></button>
+        </div>
+    </div>
+</div>
+<h4>Select preferred board to see available live data</h4>
 <table class="table table-striped" *ngIf="boards.length > 0">
     <tbody>
         <tr *ngFor="let b of boards">
             <td>
                 <b>{{b.name}}</b>
+                <br>
+                <small class="text-muted">Hub: {{b.hub}}</small>
             </td>
             <td align="right">
                 <button *ngIf="board != b" class="btn btn-primary" (click)="selectBoard(b)">Watch</button>
@@ -15,13 +28,9 @@
 <h3 *ngIf="boards.length == 0">No board registered to user</h3>
 <div *ngIf="loaded">
     <div class="row">
-        <div class="col md-6">
-            <h3 class="mb-3 text-primary">Lux</h3>
-            <ngx-realtime-chart [options]="realtimeChartOptionsLux" [data]="realtimeChartDataLux"></ngx-realtime-chart>
-        </div>
-        <div class="col md-6">
-            <h3 class="mb-3 text-primary">Temperature</h3>
-            <ngx-realtime-chart [options]="realtimeChartOptionsTemp" [data]="realtimeChartDataTemp"></ngx-realtime-chart>
+        <div class="col md-6" *ngFor="let sensor of board.sensors">
+            <h3 class="mb-3 text-primary">{{sensor.type | titlecase}}</h3>
+            <ngx-realtime-chart [options]="sensor.realtimeOption" [data]="realtimeChartDataLux"></ngx-realtime-chart>
         </div>
     </div>
     <br>

@@ -1,3 +1,3 @@
 export class Field{
-   [string: string]: number;
+   [string: string]: string;
 }

@@ -1,9 +1,21 @@
-<h1 class="mb-3 pb-2 border-bottom border-light text-primary">Choose board</h1>
+<div class="row mb-3 pb-2 border-bottom border-light">
+    <div class="col-md-10">
+        <h1 class="text-primary">Choose board</h1>
+    </div>
+    <div class="col-md">
+        <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-primary" [routerLink]="['/dashboard']">Back to dashboard
+                <fa-icon icon="table-columns"></fa-icon></button>
+        </div>
+    </div>
+</div>
 <table class="table table-striped" *ngIf="boards.length > 0">
     <tbody>
         <tr *ngFor="let board of boards">
             <td>
-                {{board.name}}
+                <b>{{board.name}}</b>
+                <br>
+                <small class="text-muted">Hub: {{board.hub}}</small>
             </td>
             <td align="right">
                 <button class="btn btn-primary" (click)="selectBoard(board)">Setup</button>

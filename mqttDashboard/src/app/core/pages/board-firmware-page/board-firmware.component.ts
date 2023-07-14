@@ -23,6 +23,7 @@ const supabase = createClient<Database>(
 export class BoardFirmwareComponent {
     firmwareText = "";
     name: string;
+    success = false;
 
     async submitForm() {
       const { data, error } = await supabase
@@ -30,7 +31,7 @@ export class BoardFirmwareComponent {
       .insert([
         { name: this.name, firmware: JSON.parse(this.firmwareText) },
       ]);
-        console.log(this.firmwareText)
+      this.success = true;
       }
     
       uploadFile(event) {

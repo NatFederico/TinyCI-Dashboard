@@ -12,6 +12,7 @@ import { interval } from 'rxjs';
 import { timeInterval } from 'rxjs/operators';
 import { RealtimeChartOptions } from 'ngx-graph';
 import { DataService } from "../../services/data.service";
+import { BoardSensors, Sensor } from "../../models/api/boardSensors.model";
 
 const supabase = createClient<Database>(
     initSupabase.supabaseUrl,
@@ -29,49 +30,34 @@ let client: mqtt.MqttClient = mqtt.connect('mqtt://mqtt.matteogastaldello.it:808
 export class LiveDataPageComponent implements OnInit {
     fields: Field[] = [];
     val: number[] = [];
+    sensors: Sensor[] = [];
     names: string[] = [];
     loaded: boolean = false;
     stringer: string;
-    board: Board;
+    board: BoardSensors = null;
     boards: Board[] = [];
     firmware: Firmware[] = [];
     index = 0;
-    realtimeChartDataLux = [[...this.data.generateRandomRealtimeData(60, 1, 0, 100)]];
-    realtimeChartDataTemp = [[...this.data.generateRandomRealtimeData(60, 10, 27, 50)]];
-
-    realtimeChartOptionsLux: RealtimeChartOptions = {
-        height: 250,
-        margin: { left: 40 },
-        lines: [
-            { color: '#34B77C', lineWidth: 3, area: true, areaColor: '#34B77C', areaOpacity: .2 }
-        ],
-        xGrid: { tickPadding: 15, tickNumber: 5 },
-        yGrid: { min: 0, max: 100, tickNumber: 5, tickFormat: (v: number) => `${v}%`, tickPadding: 25 }
-    };
-
-    realtimeChartOptionsTemp: RealtimeChartOptions = {
-        height: 250,
-        margin: { left: 40 },
-        lines: [
-            { color: '#34B77C', lineWidth: 3, area: true, areaColor: '#34B77C', areaOpacity: .2 }
-        ],
-        xGrid: { tickPadding: 15, tickNumber: 5 },
-        yGrid: { min: 0, max: 70, tickNumber: 5, tickFormat: (v: number) => `${v}°C`, tickPadding: 25 }
-    };
+    realtimeChartDataLux = [[...this.data.generateRandomRealtimeData(60, 10, 0, 3)]];
+    realtimeChartDataTemp = [[...this.data.generateRandomRealtimeData(60, 10, 27, 3)]];
 
     constructor(private http: HttpClient, private data: DataService) { }
 
     ngOnInit() {
         client.on('connect', function () {
             console.log('connected');
-        })
+        });
         this.getFields();
         interval(10000)
             .pipe(timeInterval())
             .subscribe(() => {
                 this.realtimeChartDataTemp[0].push({ date: new Date(), value: this.data.randomInt(27, 70) });
+            });
+        interval(1000)
+            .pipe(timeInterval())
+            .subscribe(() => {
                 this.realtimeChartDataLux[0].push({ date: new Date(), value: this.data.randomInt(0, 100) });
-            })
+            });
     }
 
     ngOnDestroy(): void {
@@ -83,7 +69,6 @@ export class LiveDataPageComponent implements OnInit {
             .from('boards')
             .select();
         this.boards = test;
-        console.log(this.boards);
         const { data: firmware } = await supabase
             .from('producer')
             .select();
@@ -91,15 +76,16 @@ export class LiveDataPageComponent implements OnInit {
     }
 
     selectBoard(board: Board) {
-        if(this.board == board){
+        if(this.board != null){
+            console.log('board is not null');
             this.board = null;
+            this.sensors = [];
             this.fields = [];
             this.loaded = false;
-            return;
         }
-        this.board = board;
+        this.board = new BoardSensors(board, []);
         find(this.firmware, (value) => {
-            if (value.name == this.board.name) {
+            if (value.name == this.board.board.name) {
                 const jsonObject = value.firmware;
                 for (const key in jsonObject) {
                     if (jsonObject.hasOwnProperty(key)) {
@@ -109,6 +95,36 @@ export class LiveDataPageComponent implements OnInit {
                 }
             }
         });
+        console.log(this.fields);
+        for (const element of this.fields) {
+            const getValue = element.get;
+            if (!getValue) continue;
+
+            const sensorsObj = getValue['sensors'];
+            if (!sensorsObj) continue;
+
+            for (const sensorObj of sensorsObj) {
+                const sensor = new Sensor();
+                for (const [key, value] of Object.entries(sensorObj)) {
+                    if (key === 'type') {
+                        console.log(value);
+                        sensor.type = value.toString();
+                    } else if (key === 'unit') {
+                        sensor.unit = value.toString();
+                    } else {
+                        sensor.options.max = value['max'].toString();
+                        sensor.options.min = value['min'].toString();
+                    }
+                }
+                this.sensors.push(sensor);
+            }
+        }
+        forEach(this.sensors, (value) => {
+            value.generateOption();
+        });
+        console.log(this.sensors);
+        this.board =new BoardSensors(board, this.sensors);
+        console.log(this.board);
         this.loaded = true;
     }
 }

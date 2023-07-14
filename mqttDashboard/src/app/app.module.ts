@@ -27,6 +27,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgPipesModule } from 'ngx-pipes';
 import { HttpRetryInterceptor } from './core/interceptors/http-retry.interceptor';
+import { RealtimeChartModule } from "ngx-graph";
 
 
 defineLocale('it', itLocale);
@@ -57,6 +58,7 @@ if (environment.production) {
   ],
   imports: [
     BrowserModule,
+    RealtimeChartModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,

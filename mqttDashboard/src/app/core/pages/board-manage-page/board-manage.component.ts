@@ -89,24 +89,34 @@ export class BoardManageComponent implements OnInit, OnDestroy {
     }
 
     send() {
-       this.stringer = '{';
+       this.stringer = '';
+       this.stringer += '{';
         forEach(this.names, (value) => {
-            this.stringer += '"' + value + '":' + this.val[this.indexOf(value)] + ',';
+            if(this.names.indexOf(value) == this.names.length-1){
+                this.stringer += '"' + value + '":' + this.val[this.indexOf(value)];
+            } else {
+                this.stringer += '"' + value + '":' + this.val[this.indexOf(value)] + ',';
+            }
         });
-        this.stringer = this.stringer.slice(0, -1);
         this.stringer += '}';
         client.subscribe('board_set', function (err) {
             if (!err) {
                 console.log('subscribed');
             }
         });
-        client.publish('esp-'+this.board.id, '{ \"device-name\": \"ESP\", \"id\": \"mac-address\"}');
+        client.publish('esp-'+this.board.id,this.stringer);
+        console.log('esp-'+this.board.id, JSON.parse(this.stringer));
     }
 
     test() {
         this.stringer = '{';
          forEach(this.names, (value) => {
-             this.stringer += '"' + value + '":' + this.val[this.indexOf(value)] + ',';
+            console.log(this.names.indexOf(value));
+            if(this.names.indexOf(value) == this.names.length-1){
+                this.stringer += '"' + value + '":' + this.val[this.indexOf(value)];
+            } else {
+                this.stringer += '"' + value + '":' + this.val[this.indexOf(value)] + ',';
+            }
          });
          this.stringer = this.stringer.slice(0, -1);
          this.stringer += '}';
