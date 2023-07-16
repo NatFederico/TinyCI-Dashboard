@@ -120,6 +120,7 @@ export class BoardSetupComponent implements OnInit, OnDestroy {
 
   mqttHandler() {
     client.on('message', (topic, message, packet) => {
+      console.log(topic);
       var test = JSON.parse(message.toString());
       if (topic == 'esp-firstConfiguration') {
         if(!test['device-name']){
@@ -130,7 +131,9 @@ export class BoardSetupComponent implements OnInit, OnDestroy {
         } else {
           this.hubs.push(new Hub(test['id'], test['device-name']));
         }
+        console.log(this.hubs);
       } else {
+        console.log(test);
         if(test['device-name'] && test['success'] == true){
           if(this.boards.find(x => x.id == test['device']+test['device-name'])){
             return;

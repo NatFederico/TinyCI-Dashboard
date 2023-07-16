@@ -1,6 +1,6 @@
 <div class="row mb-3 pb-2 border-bottom border-light">
     <div class="col-md-10">
-        <h1 class="text-primary">Add new Board</h1>
+        <h1 class="text-primary">Add new Device</h1>
     </div>
     <div class="col-md">
         <div class="btn-group">
@@ -36,14 +36,14 @@
 </div>
 <div *ngIf="boardsLookup && !success">
     <div *ngIf="boards.length == 0">
-        <h3>Looking for boards...</h3>
+        <h3>Looking for devices...</h3>
         <div class="spinner-border text-primary" role="status">
             <span class="sr-only"></span>
         </div>
         <br>
-        <small class="text-muted">Make sure that your board is in paring mode on the same Wi-Fi network as your Hub.</small>
+        <small class="text-muted">Make sure that your device is in paring mode on the same Wi-Fi network as your Hub.</small>
     </div>
-    <h3 *ngIf="boards.length > 0">Available boards</h3>
+    <h3 *ngIf="boards.length > 0">Available devices</h3>
     <table class="table table-striped" *ngIf="boards.length > 0">
         <tbody>
             <tr *ngFor="let board of boards">
@@ -53,7 +53,7 @@
                 <td align="right">
                     <button class="btn btn-primary" (click)="selectBoard(board)"
                         *ngIf="!boardIsMine(board)">Setup</button>
-                    <button class="btn btn-success text-white" *ngIf="boardIsMine(board)">Board already
+                    <button class="btn btn-success text-white" *ngIf="boardIsMine(board)">Device already
                         registered</button>
                 </td>
             </tr>
@@ -61,7 +61,7 @@
     </table>
 </div>
 <div *ngIf="success">
-    <h3>New board added</h3>
+    <h3>New device added</h3>
     <div class="btn-group">
         <button type="button" class="btn btn-sm btn-primary" [routerLink]="['/dashboard']">Go back to the dashboard
             <fa-icon icon="table-columns"></fa-icon></button>

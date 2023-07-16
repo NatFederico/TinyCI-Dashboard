@@ -1,6 +1,6 @@
 <div class="row mb-3 pb-2 border-bottom border-light">
     <div class="col-md-10">
-        <h1 class="text-primary">Choose board</h1>
+        <h1 class="text-primary">Choose device</h1>
     </div>
     <div class="col-md">
         <div class="btn-group">
@@ -27,12 +27,12 @@
                 </td>
                 <td align="right">
                     <button class="btn btn-primary" (click)="selectBoard(board)" *ngIf="board != focusBoard">Setup</button>
-                    <button class="btn btn-danger" (click)="exitSetup()" *ngIf="board == focusBoard">Exit</button>
+                    <button class="btn btn-danger" (click)="exitSetup()" *ngIf="board == focusBoard">Close</button>
                 </td>
             </tr>
         </tbody>
     </table>
-    <h3 *ngIf="boards.length == 0">No board registered to user</h3>
+    <h3 *ngIf="boards.length == 0">No device registered to user</h3>
     <div *ngIf="loaded && fields.length > 0">
         <h3 class="mb-3 pb-2 border-bottom border-light text-primary">{{focusBoard.name}}</h3>
         <div *ngFor="let field of names; let i = index;">
@@ -45,7 +45,7 @@
         <br>
     </div>
     <div *ngIf="loaded && fields.length == 0">
-        <h3 class="text-danger">No remote commands available for the selected board.</h3>
+        <h3 class="text-danger">No remote commands available for the selected device.</h3>
     </div>
 </div>
 <div *ngIf="sent">

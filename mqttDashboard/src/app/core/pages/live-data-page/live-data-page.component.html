@@ -9,7 +9,7 @@
         </div>
     </div>
 </div>
-<h4>Select preferred board to see available live data</h4>
+<h4>Select preferred device to see available live data</h4>
 <table class="table table-striped" *ngIf="boards.length > 0">
     <tbody>
         <tr *ngFor="let b of boards">
@@ -20,12 +20,12 @@
             </td>
             <td align="right">
                 <button *ngIf="!boardIsfocused(b)" class="btn btn-primary" (click)="selectBoard(b)">Watch</button>
-                <button *ngIf="boardIsfocused(b)" class="btn btn-danger" (click)="unwatch()">Unwatch</button>
+                <button *ngIf="boardIsfocused(b)" class="btn btn-danger" (click)="unwatch()">Close</button>
             </td>
         </tr>
     </tbody>
 </table>
-<h3 *ngIf="boards.length == 0">No board registered to user</h3>
+<h3 *ngIf="boards.length == 0">No devices registered to user</h3>
 <div *ngIf="!loaded && !DataError && flag">
     <h3 class="text-muted">Fetching data...</h3>
     <div class="spinner-border text-primary" role="status">

@@ -39,7 +39,9 @@ export class RemoteTestingComponent implements OnInit {
     }
 
     async testBoards() {
-        client.publish('esp-C0:49:EF:CD:20:CC', JSON.stringify({ 'device-name': 'MSP432', 'id': 'C0:49:EF:CD:20:CC-MSP432' }));
+        client.publish('esp-C0:49:EF:CD:20:CC', JSON.stringify({ 'device-name': 'MSP432', 'device': 'C0:49:EF:CD:20:CC', 'success': true }));
+        client.publish('esp-C0:49:EF:CD:20:CC', JSON.stringify({ 'device-name': 'MSP430', 'device': 'C0:49:EF:CD:20:CC', 'success': true }));
+        client.publish('esp-C0:49:EF:CD:20:CC', JSON.stringify({ 'device-name': 'MatterSensor', 'device': 'C0:49:EF:CD:20:CC', 'success': true }));
     }
 
     async testSensors() {
