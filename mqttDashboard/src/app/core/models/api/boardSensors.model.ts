@@ -1,21 +1,11 @@
 import { Board } from "./board.model";
 import { RealtimeChartOptions } from 'ngx-graph';
-import { Firmware } from "./firmware.model";
-import { Field } from "./field.model";
+import { DataService } from "../../services/data.service";
+
 
 export class BoardSensors {
     board: Board;
     sensors: Sensor[];
-    option: RealtimeChartOptions[] = [{
-        height: 250,
-        margin: { left: 40 },
-        lines: [
-            { color: '#34B77C', lineWidth: 3, area: true, areaColor: '#34B77C', areaOpacity: .2 }
-        ],
-        xGrid: { tickPadding: 15, tickNumber: 5 },
-        yGrid: { min: 0, max: 70, tickNumber: 5, tickFormat: (v: number) => `${v}°C`, tickPadding: 25 }
-    }];
-
     constructor(board: Board, sensors: Sensor[]) {
         this.board = board;
         this.sensors = sensors;
@@ -30,14 +20,15 @@ export class Sensor {
         min: number
     }
     realtimeOption: RealtimeChartOptions;
+    realtimeChartData: { date: Date; value: number }[][];
 
-    constructor() {
+    constructor(private data: DataService) {
         this.type = '';
         this.unit = '';
         this.options = {
             max: 0,
             min: 0
-        }
+        };
     }
 
     generateOption() {
@@ -48,7 +39,13 @@ export class Sensor {
                 { color: '#34B77C', lineWidth: 3, area: true, areaColor: '#34B77C', areaOpacity: .2 }
             ],
             xGrid: { tickPadding: 15, tickNumber: 5 },
-            yGrid: { min: this.options.min, max: this.options.max, tickNumber: 5, tickFormat: (v: number) => `${v}` + this.unit, tickPadding: 25 }
+            yGrid: { min: +this.options.min, max: +this.options.max, tickNumber: 5, tickFormat: (v: number) => `${v}` + this.unit, tickPadding: 25 }
+        }
+        if (this.type == 'temperatures') {
+            this.realtimeChartData = [[...this.data.generateRandomRealtimeData(0, 15, +this.options.min, +this.options.max)]];
+        }
+        else {
+            this.realtimeChartData = [[...this.data.generateRandomRealtimeData(0, 5, +this.options.min, +this.options.max)]];
         }
     }
 }

@@ -19,19 +19,30 @@
                 <small class="text-muted">Hub: {{b.hub}}</small>
             </td>
             <td align="right">
-                <button *ngIf="board != b" class="btn btn-primary" (click)="selectBoard(b)">Watch</button>
-                <button *ngIf="board == b" class="btn btn-danger" (click)="selectBoard(b)">Unwatch</button>
+                <button *ngIf="!boardIsfocused(b)" class="btn btn-primary" (click)="selectBoard(b)">Watch</button>
+                <button *ngIf="boardIsfocused(b)" class="btn btn-danger" (click)="unwatch()">Unwatch</button>
             </td>
         </tr>
     </tbody>
 </table>
 <h3 *ngIf="boards.length == 0">No board registered to user</h3>
-<div *ngIf="loaded">
+<div *ngIf="!loaded && !DataError && flag">
+    <h3 class="text-muted">Fetching data...</h3>
+    <div class="spinner-border text-primary" role="status">
+        <span class="sr-only"></span>
+    </div>
+    <br>
+</div>
+<div *ngIf="loaded && !DataError">
     <div class="row">
-        <div class="col md-6" *ngFor="let sensor of board.sensors">
+        <div class="col md-6" *ngFor="let sensor of boardFocus.sensors">
             <h3 class="mb-3 text-primary">{{sensor.type | titlecase}}</h3>
-            <ngx-realtime-chart [options]="sensor.realtimeOption" [data]="realtimeChartDataLux"></ngx-realtime-chart>
+            <ngx-realtime-chart [options]="sensor.realtimeOption" [data]="sensor.realtimeChartData"></ngx-realtime-chart>
+            <small class="text-muted">Average : {{ averageData(sensor) }}</small>
         </div>
     </div>
     <br>
+</div>
+<div *ngIf="DataError">
+    <h3 class="text-danger">No data available</h3>
 </div>

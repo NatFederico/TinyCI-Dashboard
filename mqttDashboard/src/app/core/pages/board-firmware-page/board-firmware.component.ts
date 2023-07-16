@@ -1,14 +1,7 @@
-import { HttpClient } from "@angular/common/http";
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { initSupabase } from "src/app/utils/initSupabase";
 import { createClient, SupabaseClient } from '@supabase/supabase-js'
 import { Database } from "src/app/utils/database.types";
-import * as mqtt from 'mqtt/dist/mqtt.js';
-import { Field } from "../../models/api/field.model";
-import { forEach } from "lodash";
-import { te } from "date-fns/locale";
-import { Board } from "../../models/api/board.model";
-import { Firmware } from "../../models/api/firmware.model";
 
 const supabase = createClient<Database>(
   initSupabase.supabaseUrl,
@@ -20,7 +13,7 @@ const supabase = createClient<Database>(
     templateUrl: './board-firmware.component.html',
     styleUrls: ['./board-firmware.component.scss']
 })
-export class BoardFirmwareComponent {
+export class BoardFirmwareComponent implements OnDestroy{
     firmwareText = "";
     name: string;
     success = false;
@@ -41,5 +34,8 @@ export class BoardFirmwareComponent {
         reader.onload = () => {
           this.firmwareText = reader.result as string;
         };
+      }
+      ngOnDestroy(): void {
+        supabase
       }
 }

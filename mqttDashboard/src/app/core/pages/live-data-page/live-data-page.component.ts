@@ -10,7 +10,6 @@ import { Field } from "../../models/api/field.model";
 import { Firmware } from "../../models/api/firmware.model";
 import { interval } from 'rxjs';
 import { timeInterval } from 'rxjs/operators';
-import { RealtimeChartOptions } from 'ngx-graph';
 import { DataService } from "../../services/data.service";
 import { BoardSensors, Sensor } from "../../models/api/boardSensors.model";
 
@@ -31,15 +30,14 @@ export class LiveDataPageComponent implements OnInit {
     fields: Field[] = [];
     val: number[] = [];
     sensors: Sensor[] = [];
-    names: string[] = [];
     loaded: boolean = false;
+    loading: boolean = false;
     stringer: string;
-    board: BoardSensors = null;
+    boardFocus: BoardSensors;
     boards: Board[] = [];
     firmware: Firmware[] = [];
-    index = 0;
-    realtimeChartDataLux = [[...this.data.generateRandomRealtimeData(60, 10, 0, 3)]];
-    realtimeChartDataTemp = [[...this.data.generateRandomRealtimeData(60, 10, 27, 3)]];
+    DataError: boolean = false;
+    flag: boolean = false;
 
     constructor(private http: HttpClient, private data: DataService) { }
 
@@ -48,16 +46,7 @@ export class LiveDataPageComponent implements OnInit {
             console.log('connected');
         });
         this.getFields();
-        interval(10000)
-            .pipe(timeInterval())
-            .subscribe(() => {
-                this.realtimeChartDataTemp[0].push({ date: new Date(), value: this.data.randomInt(27, 70) });
-            });
-        interval(1000)
-            .pipe(timeInterval())
-            .subscribe(() => {
-                this.realtimeChartDataLux[0].push({ date: new Date(), value: this.data.randomInt(0, 100) });
-            });
+        this.mqttHandler();
     }
 
     ngOnDestroy(): void {
@@ -75,17 +64,63 @@ export class LiveDataPageComponent implements OnInit {
         this.firmware = firmware;
     }
 
+    averageData(sensor: Sensor) {
+        let sum = 0;
+        let index = 0;
+        sensor.realtimeChartData.forEach(element => {
+            forEach(element, (value) => {
+                index++;
+                sum += value.value;
+            });
+        });
+        return (sum / index).toPrecision(4);
+    }
+
+    boardIsfocused(board: Board) {
+        if (this.boardFocus == null) {
+            return false;
+        }
+        if (this.boardFocus.board.id == board.id) {
+            return true;
+        }
+        return false;
+    }
+
+    unwatch() {
+        client.unsubscribe('esp-' + this.boardFocus.board.hub, function (err) {
+            if (!err) {
+                console.log('unsubscribed');
+            }
+        });
+        this.DataError = false;
+        this.boardFocus = null;
+        this.sensors = [];
+        this.fields = [];
+        this.loaded = false;
+        this.flag = false;
+    }
+
     selectBoard(board: Board) {
-        if(this.board != null){
-            console.log('board is not null');
-            this.board = null;
+        this.flag = true;
+        client.subscribe('esp-' + board.hub, function (err) {
+            if (!err) {
+                console.log('subscribed');
+            }
+        })
+        this.loading = true;
+        client.publish('esp-' + board.hub, JSON.stringify({ 'mode': 'get', 'device': board.name, 'stream': true }));
+        //client.publish('esp-' + board.hub, JSON.stringify({ 'mode': 'get', 'device': 'null', 'stream': true }));
+        this.mqttHandler();
+        if (this.boardFocus != null) {
+            this.boardFocus = null;
             this.sensors = [];
             this.fields = [];
             this.loaded = false;
+            this.loading = false;
         }
-        this.board = new BoardSensors(board, []);
+        this.boardFocus = new BoardSensors(board, []);
         find(this.firmware, (value) => {
-            if (value.name == this.board.board.name) {
+            if (value.name == this.boardFocus.board.name) {
                 const jsonObject = value.firmware;
                 for (const key in jsonObject) {
                     if (jsonObject.hasOwnProperty(key)) {
@@ -95,7 +130,6 @@ export class LiveDataPageComponent implements OnInit {
                 }
             }
         });
-        console.log(this.fields);
         for (const element of this.fields) {
             const getValue = element.get;
             if (!getValue) continue;
@@ -104,10 +138,9 @@ export class LiveDataPageComponent implements OnInit {
             if (!sensorsObj) continue;
 
             for (const sensorObj of sensorsObj) {
-                const sensor = new Sensor();
+                const sensor = new Sensor(new DataService());
                 for (const [key, value] of Object.entries(sensorObj)) {
                     if (key === 'type') {
-                        console.log(value);
                         sensor.type = value.toString();
                     } else if (key === 'unit') {
                         sensor.unit = value.toString();
@@ -122,9 +155,38 @@ export class LiveDataPageComponent implements OnInit {
         forEach(this.sensors, (value) => {
             value.generateOption();
         });
-        console.log(this.sensors);
-        this.board =new BoardSensors(board, this.sensors);
-        console.log(this.board);
-        this.loaded = true;
+        this.boardFocus = new BoardSensors(board, this.sensors);
+    }
+
+    mqttHandler() {
+        client.on('message', (topic, message, packet) => {
+            let messageTest: JSON = JSON.parse(message.toString());
+            if (topic == 'esp-' + this.boardFocus.board.hub) {
+                if (messageTest['success'] == false) {
+                    this.DataError = true;
+                    return;
+                }
+                if (messageTest['sensors']) {
+                    this.DataError = false;
+                    var jsonSens = messageTest['sensors'];
+                    forEach(this.boardFocus.sensors, (value) => {
+                        if (jsonSens[value.type]) {
+                            let sum = 0;
+                            if (jsonSens[value.type].length > 1) {
+                                forEach(jsonSens[value.type], (value2) => {
+                                    sum += +value2;
+                                });
+                                let avg = sum / jsonSens[value.type].length;
+                                value.realtimeChartData[0].push({ date: new Date(), value: avg });
+                            } else {
+                                sum = parseFloat(jsonSens[value.type])*100;
+                                value.realtimeChartData[0].push({ date: new Date(), value: sum });
+                            }
+                        }
+                    });
+                    this.loaded = true;
+                }
+            }
+        });
     }
 }

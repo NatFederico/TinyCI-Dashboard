@@ -10,31 +10,40 @@
     </div>
 </div>
 <div *ngIf="!success && !boardsLookup">
-    <h3>List of available Hubs</h3>
-<table class="table table-striped" *ngIf="hubs.length > 0">
-    <tbody>
-        <tr *ngFor="let hub of hubs">
-            <td>
-                {{hub.device}}
-                <br>
-                <small class="text-muted">MAC: {{hub.id}}</small>
-                <small *ngIf="isRegistered(hub)" class="text-muted"> - alredy registered to user</small>
-            </td>
-            <td align="right">
-                <button class="btn btn-primary" (click)="registerHub(hub)" *ngIf="!isRegistered(hub)">Register</button>
-                <button class="btn btn-primary" (click)="setDeviceDiscovery(hub)" *ngIf="isRegistered(hub)">Open</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
-<h4 *ngIf="hubs.length == 0">No Hubs available in your current mqtt server</h4>
+    <h3 *ngIf="hubs.length > 0">List of available Hubs</h3>
+    <table class="table table-striped" *ngIf="hubs.length > 0">
+        <tbody>
+            <tr *ngFor="let hub of hubs">
+                <td>
+                    {{hub.device}}
+                    <br>
+                    <small class="text-muted">MAC: {{hub.id}}</small>
+                    <small *ngIf="isRegistered(hub)" class="text-muted"> - already registered to user</small>
+                </td>
+                <td align="right">
+                    <button class="btn btn-primary" (click)="registerHub(hub)"
+                        *ngIf="!isRegistered(hub)">Register</button>
+                    <button class="btn btn-primary" (click)="setDeviceDiscovery(hub)"
+                        *ngIf="isRegistered(hub)">Open</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div *ngIf="hubs.length == 0">
+        <h3>No Hubs available in your current mqtt server</h3>
+        <small class="text-muted">Make sure that your Hub is turned on.</small>
+    </div>
 </div>
 <div *ngIf="boardsLookup && !success">
-    <h3 *ngIf="boards.length == 0">Looking for boards...</h3>
-    <h3 *ngIf="boards.length > 0">Available boards</h3>
-    <div class="spinner-border text-primary" role="status" *ngIf="boards.length == 0">
-        <span class="sr-only"></span>
+    <div *ngIf="boards.length == 0">
+        <h3>Looking for boards...</h3>
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only"></span>
+        </div>
+        <br>
+        <small class="text-muted">Make sure that your board is in paring mode on the same Wi-Fi network as your Hub.</small>
     </div>
+    <h3 *ngIf="boards.length > 0">Available boards</h3>
     <table class="table table-striped" *ngIf="boards.length > 0">
         <tbody>
             <tr *ngFor="let board of boards">
@@ -42,8 +51,10 @@
                     <b>{{board.name}}</b>
                 </td>
                 <td align="right">
-                    <button class="btn btn-primary" (click)="selectBoard(board)"  *ngIf="!boardIsMine" >Setup</button>
-                    <button class="btn btn-success text-white" *ngIf="boardIsMine">Board already registered</button>
+                    <button class="btn btn-primary" (click)="selectBoard(board)"
+                        *ngIf="!boardIsMine(board)">Setup</button>
+                    <button class="btn btn-success text-white" *ngIf="boardIsMine(board)">Board already
+                        registered</button>
                 </td>
             </tr>
         </tbody>
@@ -57,5 +68,3 @@
     </div>
 </div>
 <br>
-<button class="btn btn-primary" (click)="testHubs()">Hubs</button>
-<button class="btn btn-primary" (click)="testBoards()">Boards</button>

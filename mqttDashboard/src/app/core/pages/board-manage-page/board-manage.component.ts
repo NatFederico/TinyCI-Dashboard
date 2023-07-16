@@ -4,7 +4,7 @@ import { initSupabase } from "src/app/utils/initSupabase";
 import { createClient, SupabaseClient } from '@supabase/supabase-js'
 import { Database } from "src/app/utils/database.types";
 import * as mqtt from 'mqtt/dist/mqtt.js';
-import { Field } from "../../models/api/field.model";
+import { Field, FieldDescription } from "../../models/api/field.model";
 import { find, forEach } from "lodash";
 import { fi, te } from "date-fns/locale";
 import { Board } from "../../models/api/board.model";
@@ -24,13 +24,15 @@ let client: mqtt.MqttClient = mqtt.connect('mqtt://mqtt.matteogastaldello.it:808
 })
 
 export class BoardManageComponent implements OnInit, OnDestroy {
-    fields: Field[] = [];
-    val: number[] = [];
+    fields: FieldDescription[] = [];
+    val: string[] = [];
     names: string[] = [];
+    desc: string[] = [];
     loaded: boolean = false;
+    sent: boolean = false;
     stringer: string;
-    board: Board;
-    boards: Board[] = [];
+    focusBoard: Board;
+    boards: Board[] = null;
     firmware: Firmware[] = [];
     index = 0;
 
@@ -47,12 +49,19 @@ export class BoardManageComponent implements OnInit, OnDestroy {
         client.end();
     }
 
+    exitSetup() {
+        this.loaded = false;
+        this.focusBoard = null;
+        this.fields = [];
+        this.val = [];
+        this.names = [];
+    }
+
     async getFields() {
         const { data: test, error } = await supabase
             .from('boards')
             .select();
         this.boards = test;
-        console.log(this.boards);
         const { data: firmware } = await supabase
             .from('producer')
             .select();
@@ -61,27 +70,30 @@ export class BoardManageComponent implements OnInit, OnDestroy {
 
     selectBoard(board: Board) {
         this.fields = [];
-        this.board = board;
+        this.focusBoard = board;
         find(this.firmware, (value) => {
-            if (value.name == this.board.name) {
-                const jsonObject = value.firmware;
+            if (value.name == this.focusBoard.name) {
+                const jsonObject = value.firmware['set'];
                 for (const key in jsonObject) {
                     if (jsonObject.hasOwnProperty(key)) {
                         const element = jsonObject[key];
-                        this.fields.push({ [key]: element });
+                        this.fields.push(new FieldDescription(key, element['type'], element['display_name'], element['description']));
                     }
                 }
             }
         });
-        this.Names();
+        this.Infos();
         this.loaded = true;
     }
 
-    Names(){
+    Infos() {
         this.names = [];
+        this.desc = [];
         forEach(this.fields, (value) => {
-            this.names.push(Object.keys(value)[0]);
+            this.names.push(value.display_name);
+            this.desc.push(value.description);
         });
+
     }
 
     indexOf(name: string) {
@@ -89,42 +101,11 @@ export class BoardManageComponent implements OnInit, OnDestroy {
     }
 
     send() {
-       this.stringer = '';
-       this.stringer += '{';
-        forEach(this.names, (value) => {
-            if(this.names.indexOf(value) == this.names.length-1){
-                this.stringer += '"' + value + '":' + this.val[this.indexOf(value)];
-            } else {
-                this.stringer += '"' + value + '":' + this.val[this.indexOf(value)] + ',';
-            }
-        });
-        this.stringer += '}';
-        client.subscribe('board_set', function (err) {
-            if (!err) {
-                console.log('subscribed');
-            }
-        });
-        client.publish('esp-'+this.board.id,this.stringer);
-        console.log('esp-'+this.board.id, JSON.parse(this.stringer));
+        client.publish('esp-' + this.focusBoard.hub, JSON.stringify({'device': this.focusBoard.name ,'mode': 'set', 'program': this.val[0] }));
+        this.sent = true;
     }
 
-    test() {
-        this.stringer = '{';
-         forEach(this.names, (value) => {
-            console.log(this.names.indexOf(value));
-            if(this.names.indexOf(value) == this.names.length-1){
-                this.stringer += '"' + value + '":' + this.val[this.indexOf(value)];
-            } else {
-                this.stringer += '"' + value + '":' + this.val[this.indexOf(value)] + ',';
-            }
-         });
-         this.stringer = this.stringer.slice(0, -1);
-         this.stringer += '}';
-         client.subscribe('board_set', function (err) {
-             if (!err) {
-                 console.log('subscribed');
-             }
-         });
-         client.publish('esp-firstConfiguration', '{ \"device-name\": \"ESP\", \"id\": \"mac-address\"}');
-     }
+    refresh(){
+        window.location.reload();
+    }
 }

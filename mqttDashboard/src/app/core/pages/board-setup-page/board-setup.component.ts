@@ -42,11 +42,12 @@ export class BoardSetupComponent implements OnInit, OnDestroy {
         console.log('subscribed');
       }
     })
+    client.publish('esp-firstConfiguration', JSON.stringify({ 'mode': 'discovery'}));
     this.mqttHandler();
   }
 
   ngOnDestroy(): void {
-    client.end();
+    client.end(true);
   }
 
   isRegistered(hub: Hub) {
@@ -74,7 +75,6 @@ export class BoardSetupComponent implements OnInit, OnDestroy {
       .from('Hubs')
       .select();
     this.myHubs = data;
-    console.log(this.myHubs);
   }
 
   async getMyBoards() {
@@ -83,7 +83,6 @@ export class BoardSetupComponent implements OnInit, OnDestroy {
       .select('*')
       .eq('hub', this.selectedHub.id);
     this.myBoards = data;
-    console.log(this.myBoards);
   }
 
   async setDeviceDiscovery(hub: Hub) {
@@ -105,7 +104,6 @@ export class BoardSetupComponent implements OnInit, OnDestroy {
       .insert([
         { id: hub.id, device: hub.device },
       ]);
-    client.publish('esp-firstConfiguration', JSON.stringify({ 'device-name': hub.device, 'id': hub.id, 'status': 'registered' }));
     this.setDeviceDiscovery(hub);
   }
 
@@ -120,34 +118,37 @@ export class BoardSetupComponent implements OnInit, OnDestroy {
     client.publish('esp-'+this.selectedHub.id, JSON.stringify({ 'device-name': board.name, 'id': board.id, 'status': 'registered' }));
   }
 
-  async testHubs() {
-    client.publish('esp-firstConfiguration', JSON.stringify({ 'device-name': 'ESP32', 'id': '35:67:AC:C0' }));
-  }
-
-  async testBoards() {
-    client.publish('esp-' + this.selectedHub.id, JSON.stringify({ 'device-name': 'MSP432', 'id': '35:67:AC:C0' }));
-  }
-
   mqttHandler() {
     client.on('message', (topic, message, packet) => {
       var test = JSON.parse(message.toString());
       if (topic == 'esp-firstConfiguration') {
+        if(!test['device-name']){
+          return;
+        }
         if (this.hubs.find(x => x.id == test['id'])) {
           return;
         } else {
           this.hubs.push(new Hub(test['id'], test['device-name']));
         }
       } else {
+        if(test['device-name'] && test['success'] == true){
+          if(this.boards.find(x => x.id == test['device']+test['device-name'])){
+            return;
+          } else {
+            this.boards.push(new Board(test['device']+test['device-name'], test['device-name'], this.selectedHub.id));
+            test['registered'] = true;
+            client.publish('esp-'+this.selectedHub.id, JSON.stringify(test));
+          }
+          return;
+        }
         if(test['mode'] == 'discovery'){
           return;
         }
         if (test['status'] == 'registered') {
           return;
         }
-        if (this.boards.find(x => x.id == test['id'])) {
+        if (test['sensors']){
           return;
-        } else {
-          this.boards.push(new Board(test['id'], test['device-name'], this.selectedHub.id));
         }
       }
     });

@@ -22,6 +22,10 @@ const routes: Routes = [
         path: 'live',
         loadChildren: () => import('./pages/live-data-page/live-data-page.module').then( m => m.LiveDataPageModule),
     },
+    {
+        path: 'testing',
+        loadChildren: () => import('./pages/remote-testing/remote-testing.module').then( m => m.RemoteTestingModule),
+    },
 ];
 
 @NgModule({

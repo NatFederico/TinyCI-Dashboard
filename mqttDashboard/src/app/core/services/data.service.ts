@@ -15,10 +15,10 @@ export class DataService {
   }
 
   generateRandomRealtimeData(
-    n: number = 10,
-    step: number = 1,
-    min: number = 0,
-    max: number = 100,
+    n: number,
+    step: number,
+    min: number,
+    max: number,
     date = new Date()
   ): { date: Date; value: number }[] {
     return Array.from(Array(n).keys())

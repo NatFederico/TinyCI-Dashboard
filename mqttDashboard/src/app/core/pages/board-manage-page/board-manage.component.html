@@ -9,28 +9,50 @@
         </div>
     </div>
 </div>
-<table class="table table-striped" *ngIf="boards.length > 0">
-    <tbody>
-        <tr *ngFor="let board of boards">
-            <td>
-                <b>{{board.name}}</b>
-                <br>
-                <small class="text-muted">Hub: {{board.hub}}</small>
-            </td>
-            <td align="right">
-                <button class="btn btn-primary" (click)="selectBoard(board)">Setup</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
-<h3 *ngIf="boards.length == 0">No board registered to user</h3>
-<div *ngIf="loaded">
-    <h3 class="mb-3 pb-2 border-bottom border-light text-primary">{{board.name}}</h3>
-    <div *ngFor="let field of names; let i = index;">
-            <label [attr.for]="field">{{ field | titlecase }}:</label>
-            <input type="number" class="form-control" [(ngModel)]="val[i]">
+<div *ngIf="!boards">
+    <h3 class="text-muted">Fetching data...</h3>
+    <div class="spinner-border text-primary" role="status">
+        <span class="sr-only"></span>
     </div>
     <br>
-    <button (click)="send()" class="btn btn-primary">Submit</button>
-    <br>
+</div>
+<div *ngIf="boards && !sent">
+    <table class="table table-striped" *ngIf="boards.length > 0">
+        <tbody>
+            <tr *ngFor="let board of boards">
+                <td>
+                    <b>{{board.name}}</b>
+                    <br>
+                    <small class="text-muted">Hub: {{board.hub}}</small>
+                </td>
+                <td align="right">
+                    <button class="btn btn-primary" (click)="selectBoard(board)" *ngIf="board != focusBoard">Setup</button>
+                    <button class="btn btn-danger" (click)="exitSetup()" *ngIf="board == focusBoard">Exit</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <h3 *ngIf="boards.length == 0">No board registered to user</h3>
+    <div *ngIf="loaded && fields.length > 0">
+        <h3 class="mb-3 pb-2 border-bottom border-light text-primary">{{focusBoard.name}}</h3>
+        <div *ngFor="let field of names; let i = index;">
+                <label [attr.for]="field">{{ field | titlecase }}:</label>
+                <input type="text" class="form-control" [(ngModel)]="val[i]">
+                <small class="text-muted">{{desc[i]}}</small>
+        </div>
+        <br>
+        <button (click)="send()" class="btn btn-primary">Submit</button>
+        <br>
+    </div>
+    <div *ngIf="loaded && fields.length == 0">
+        <h3 class="text-danger">No remote commands available for the selected board.</h3>
+    </div>
+</div>
+<div *ngIf="sent">
+    <h3 class="text-success">Command sent successfully</h3>
+    <div class="btn-group">
+        <button type="button" class="btn btn-sm btn-primary" [routerLink]="['/dashboard']">Go back to the dashboard
+            <fa-icon icon="table-columns"></fa-icon></button>
+        <button type="button" class="btn btn-secondary" (click)="refresh()">Send another one</button>
+    </div>
 </div>

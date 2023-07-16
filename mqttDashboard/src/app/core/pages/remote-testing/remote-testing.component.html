@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="btn-group">
+        <button class="btn btn-primary" (click)="testHubs()">Hubs</button>
+        <button class="btn btn-secondary" (click)="testBoards()">Boards</button>
+        <button class="btn btn-success" (click)="testSensors()">Sensors</button>
+        <button class="btn btn-warning" (click)="forceDiscoveryMode()">Discovery</button>
+    </div>
+    <hr>
+    <div class="row-md-10">
+        <textarea cols="50" [innerHTML]="mqttFeed"></textarea>
+    </div>
+</div>
