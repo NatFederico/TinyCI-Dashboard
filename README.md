@@ -43,12 +43,12 @@ Firstly the user is presented with a 6 digit pin, that is provided with the hub,
 
 For registering a device we must first connect to their Hub, in fact we send a request throught our MQTT. Here are the steps from the dashboard.
 
-| MQTT | From To  | Description |
+| Description | From To  | MQTT |
 |---|---|---|
-| ` esp-firstConfiguration:{"mode":"discovery"} ` | Dashboard &rarr; MQTT Broker &rarr; HUB | This message is sent everytime the TinyCI Dashboard is looking for Hubs |
-|  `esp-firstConfiguration:{"device-name":"ESP32","id":"C0:49:EF:CD:20:CC"}` | Hub &rarr; MQTT broker &rarr; Dashboard | Once recived the discovery message the Hub responds with its details ( ` id`` is the MAC address and  ` device-name` is set by the manifacturer) |
-| ` esp-C0:49:EF:CD:20:CC:{"mode":"discovery","device":"C0:49:EF:CD:20:CC"} ` | Dashboard &rarr; MQTT Broker &rarr; HUB | We set the topic to esp + hub.id and set it to discovery mode, so that the hub scans it's Wi-Fi network thourgh web sockets and returns the edge devices available |
-| `esp-C0:49:EF:CD:20:CC:{"device-name":"MSP432","id":"C0:49:EF:CD:20:CC-MSP432","status":"registered"} ` | Hub &rarr; MQTT broker &rarr; Dashboard | Returns that the device has been registered to the user |
+|  This message is sent everytime the TinyCI Dashboard is looking for Hubs | Dashboard &rarr; MQTT Broker &rarr; HUB | ` esp-firstConfiguration : { "mode" : "discovery" } `|
+| Once recived the discovery message the Hub responds with its details ( `id` is the MAC address and  ` device-name` is set by the manifacturer)   | Hub &rarr; MQTT broker &rarr; Dashboard | `esp-firstConfiguration: { "device-name" : "ESP32" , "id" : "C0:49:EF:CD:20:CC" }`|
+| We set the topic to esp + hub.id and set it to discovery mode, so that the hub scans it's Wi-Fi network thourgh web sockets and returns the edge devices available | Dashboard &rarr; MQTT Broker &rarr; HUB |  ` esp-C0:49:EF:CD:20:CC : { "mode" : "discovery" , "device" : "C0:49:EF:CD:20:CC" } `|
+| Returns that the device has been registered to the user | Hub &rarr; MQTT broker &rarr; Dashboard |  `esp-C0:49:EF:CD:20:CC : { "device-name" : "MSP432" , "id" : "C0:49:EF:CD:20:CC-MSP432", "status" : "registered" } `|
 
 ## Manage boards
 
