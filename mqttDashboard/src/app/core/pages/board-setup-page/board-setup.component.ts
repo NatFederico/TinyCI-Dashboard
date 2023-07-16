@@ -138,7 +138,7 @@ export class BoardSetupComponent implements OnInit, OnDestroy {
           if(this.boards.find(x => x.id == test['device']+test['device-name'])){
             return;
           } else {
-            this.boards.push(new Board(test['device']+test['device-name'], test['device-name'], this.selectedHub.id));
+            this.boards.push(new Board(test['device']+'-'+test['device-name'], test['device-name'], this.selectedHub.id));
             test['registered'] = true;
             client.publish('esp-'+this.selectedHub.id, JSON.stringify(test));
           }

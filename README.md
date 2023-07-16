@@ -38,16 +38,17 @@ Let's dive firstly into the first category with what a typical user does at it's
 
 Firstly the user is presented with a 6 digit pin, that is provided with the hub, that logs him in to the dashboard in which he has an overview all of the features available to him as shown in picture:
 
-![alt text](/assets/dashboard_landing.png "image")
 
 ## Register
 
 For registering a device we must first connect to their Hub, in fact we send a request throught our MQTT 
 
-| Message | From/To | Description |
-|   ---    |     ---     | --- |
-| `pairingBehaviour` | A wrapper function that sets the wifi module as a station and then scans the network to find a device to handshake with| Bal valavAJHDOASHFIOWHSFIOHWIOFHERWOIFH    |
-| `pairingInterfaceRender` | A wrapper function that clears the display of the [BOOSTXL-EDUMKII](https://www.ti.com/tool/BOOSTXL-EDUMKII) and then prints "pairing" in it| |
+| Topic | Message | From &rarr; To | Description |
+|    --     |   --   |     ----     |    -----    |
+| `esp-firstConfiguration` | `{"mode":"discovery"}` | Dashboard &rarr; MQTT Broker &rarr; HUB | This message is sent everytime the TinyCI Dashboard is looking for Hubs |
+| `esp-firstConfiguration` | `{"device-name":"ESP32","id":"C0:49:EF:CD:20:CC"}` |  Hub &rarr; MQTT broker &rarr; Dashboard | Once recived the discovery message the Hub responds with its details (`id`` is the MAC address and `device-name` is set by the manifacturer) |
+|`esp-C0:49:EF:CD:20:CC`| `{"mode":"discovery","device":"C0:49:EF:CD:20:CC"}` | Hub &rarr; MQTT broker &rarr; Dashboard | We set the topic to esp + hub.id and set it to discovery mode, so that the hub scans it's Wi-Fi network thourgh web sockets and returns the edge devices avialable  |
+|`esp-C0:49:EF:CD:20:CC`| `{"device-name":"MSP432","id":"C0:49:EF:CD:20:CC-MSP432","status":"registered"} ` | Dashboard &rarr; MQTT Broker &rarr; HUB | Returns that the device has been registered to the user  |
 
 ## Manage boards
 
