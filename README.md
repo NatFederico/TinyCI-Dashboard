@@ -41,16 +41,18 @@ Firstly the user is presented with a 6 digit pin, that is provided with the hub,
 
 ## Register
 
-For registering a device we must first connect to their Hub, in fact we send a request throught our MQTT 
+For registering a device we must first connect to their Hub, in fact we send a request throught our MQTT. Here are the steps from the dashboard.
 
-| Topic | Message | From &rarr; To | Description |
-| -- | -- | ------ | --------- |
-| `esp-firstConfiguration` | `{"mode":"discovery"}` | Dashboard &rarr; MQTT Broker &rarr; HUB | This message is sent everytime the TinyCI Dashboard is looking for Hubs |
-| `esp-firstConfiguration` | `{"device-name":"ESP32","id":"C0:49:EF:CD:20:CC"}` |  Hub &rarr; MQTT broker &rarr; Dashboard | Once recived the discovery message the Hub responds with its details (`id`` is the MAC address and `device-name` is set by the manifacturer) |
-|`esp-C0:49:EF:CD:20:CC`| `{"mode":"discovery","device":"C0:49:EF:CD:20:CC"}` | Hub &rarr; MQTT broker &rarr; Dashboard | We set the topic to esp + hub.id and set it to discovery mode, so that the hub scans it's Wi-Fi network thourgh web sockets and returns the edge devices avialable  |
-|`esp-C0:49:EF:CD:20:CC`| `{"device-name":"MSP432","id":"C0:49:EF:CD:20:CC-MSP432","status":"registered"} ` | Dashboard &rarr; MQTT Broker &rarr; HUB | Returns that the device has been registered to the user  |
+| Topic | From &rarr; To | Description |
+|  ---  |      ---      |     ---     |
+| `esp-firstConfiguration:{"mode":"discovery"}` | Dashboard &rarr; MQTT Broker &rarr; HUB | This message is sent everytime the TinyCI Dashboard is looking for Hubs |
+| `esp-firstConfiguration:{"device-name":"ESP32","id":"C0:49:EF:CD:20:CC"}` |  Hub &rarr; MQTT broker &rarr; Dashboard | Once recived the discovery message the Hub responds with its details (`id`` is the MAC address and `device-name` is set by the manifacturer) |
+|`esp-C0:49:EF:CD:20:CC:{"mode":"discovery","device":"C0:49:EF:CD:20:CC"}` | Hub &rarr; MQTT broker &rarr; Dashboard | We set the topic to esp + hub.id and set it to discovery mode, so that the hub scans it's Wi-Fi network thourgh web sockets and returns the edge devices avialable  |
+|`esp-C0:49:EF:CD:20:CC:{"device-name":"MSP432","id":"C0:49:EF:CD:20:CC-MSP432","status":"registered"} ` | Dashboard &rarr; MQTT Broker &rarr; HUB | Returns that the device has been registered to the user |
 
 ## Manage boards
+
+
 
 ## Live Data
 
