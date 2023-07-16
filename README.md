@@ -1,4 +1,4 @@
-# Dashboard for Embedded Systems
+# TinyCI Dashboard
 
 # Description
 
@@ -36,11 +36,18 @@ We can divide the features of our dashboard in two main categories:
 
 Let's dive firstly into the first category with what a typical user does at it's first utilization and let's analyze it step by step:
 
-Firstly the user is presented with a 6 digit pin, that is provided with the hub, that logs him in to the dashboard in which he has an overview all of the features available to him:
+Firstly the user is presented with a 6 digit pin, that is provided with the hub, that logs him in to the dashboard in which he has an overview all of the features available to him as shown in picture:
 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+![alt text](/assets/dashboard_landing.png "image")
 
-## Board setup
+## Register
+
+For registering a device we must first connect to their Hub, in fact we send a request throught our MQTT 
+
+| Message | From/To | Description |
+|   ---    |     ---     | --- |
+| `pairingBehaviour` | A wrapper function that sets the wifi module as a station and then scans the network to find a device to handshake with| Bal valavAJHDOASHFIOWHSFIOHWIOFHERWOIFH    |
+| `pairingInterfaceRender` | A wrapper function that clears the display of the [BOOSTXL-EDUMKII](https://www.ti.com/tool/BOOSTXL-EDUMKII) and then prints "pairing" in it| |
 
 ## Manage boards
 
