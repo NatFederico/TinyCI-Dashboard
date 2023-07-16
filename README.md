@@ -27,48 +27,6 @@ It was imperative for our communication system to be as easy to use for the end 
 
 When we firstly started this project we planned on a featuring OTA (over the air updates) and after a lot of reaserch on how to best implement it we decided on AWS E2C IoT, which are instances configure with the purpose of IoT applications. After a lot of troubleshooting on making the broker properly work, we started working on a piece of custom software that was able to get any .ino/.c/.cpp compile it, link it and send the binary file back to the device but was then put on hold to concentrate on the main focus of the project, given that ammount of work was enormous, but we could consider it for feature improvements.
 
-# How does it work?
-
-We can divide the features of our dashboard in two main categories:
-
-- End-user focused
-- Manifacturer focused
-
-Let's dive firstly into the first category with what a typical user does at it's first utilization and let's analyze it step by step:
-
-Firstly the user is presented with a 6 digit pin, that is provided with the hub, that logs him in to the dashboard in which he has an overview all of the features available to him as shown in picture:
-
-
-## Register
-
-To register a device we must first connect to their Hub, in fact we send a request throught our MQTT. Here are the steps from the dashboard.
-
-| MQTT | From To  | Description |
-|---|---|---|
-| ` esp-firstConfiguration : { "mode" : "discovery" } ` | Dashboard &rarr; MQTT Broker &rarr; HUB |  This message is sent everytime the TinyCI Dashboard is looking for Hubs.|
-| `esp-firstConfiguration: { "device-name" : "ESP32" , "id" : "C0:49:EF:CD:20:CC" }`  | Hub &rarr; MQTT broker &rarr; Dashboard | Once recived the discovery message the Hub responds with its details ( `id` is the MAC address and  ` device-name` is set by the manifacturer).|
-| ` esp-C0:49:EF:CD:20:CC : { "mode" : "discovery" , "device" : "C0:49:EF:CD:20:CC" } ` | Dashboard &rarr; MQTT Broker &rarr; HUB | We set the topic to esp + hub.id and set it to discovery mode, so that the hub scans it's Wi-Fi network thourgh web sockets and returns the edge devices available.|
-| `esp-C0:49:EF:CD:20:CC : { "device-name" : "MSP432" , "id" : "C0:49:EF:CD:20:CC-MSP432", "status" : "registered" } ` | Hub &rarr; MQTT broker &rarr; Dashboard | Returns that the device has been registered to the user.|
-
-## Manage devices
-
-We also have the ability of managing devices, if the manifacturer has provided our propretary JSON file
-
-| MQTT | From To  | Description |
-|---|---|---|
-| ` esp-firstConfiguration : { "mode" : "discovery" } ` | Dashboard &rarr; MQTT Broker &rarr; HUB |  This message is sent everytime the TinyCI Dashboard is looking for Hubs.|
-| `esp-firstConfiguration: { "device-name" : "ESP32" , "id" : "C0:49:EF:CD:20:CC" }`  | Hub &rarr; MQTT broker &rarr; Dashboard | Once recived the discovery message the Hub responds with its details ( `id` is the MAC address and  ` device-name` is set by the manifacturer).|
-| ` esp-C0:49:EF:CD:20:CC : { "mode" : "discovery" , "device" : "C0:49:EF:CD:20:CC" } ` | Dashboard &rarr; MQTT Broker &rarr; HUB | We set the topic to esp + hub.id and set it to discovery mode, so that the hub scans it's Wi-Fi network thourgh web sockets and returns the edge devices available.|
-| `esp-C0:49:EF:CD:20:CC : { "device-name" : "MSP432" , "id" : "C0:49:EF:CD:20:CC-MSP432", "status" : "registered" } ` | Hub &rarr; MQTT broker &rarr; Dashboard | Returns that the device has been registered to the user.|
-
-## Live Data
-
-## Board setup by manifacturer
-
-# Problems during development
-
-# Authors and Acknwoledgments
-
 # Project Layout
 
 ```bash
@@ -160,29 +118,6 @@ MqttDashboard
 │   │   │       │   └── index.ts
 │   │   │       └── selectors
 │   │   │           └── auth.selectors.ts
-│   │   ├── features
-│   │   │   └── user
-│   │   │       ├── pages
-│   │   │       │   ├── user-home-page
-│   │   │       │   │   ├── user-home-page.component.html
-│   │   │       │   │   ├── user-home-page.component.scss
-│   │   │       │   │   ├── user-home-page.component.spec.ts
-│   │   │       │   │   ├── user-home-page.component.ts
-│   │   │       │   │   └── user-home-page.module.ts
-│   │   │       │   ├── user-page1-page
-│   │   │       │   │   ├── user-page1-page.component.html
-│   │   │       │   │   ├── user-page1-page.component.scss
-│   │   │       │   │   ├── user-page1-page.component.spec.ts
-│   │   │       │   │   ├── user-page1-page.component.ts
-│   │   │       │   │   └── user-page1-page.module.ts
-│   │   │       │   └── user-page2-page
-│   │   │       │       ├── user-page2-page.component.html
-│   │   │       │       ├── user-page2-page.component.scss
-│   │   │       │       ├── user-page2-page.component.spec.ts
-│   │   │       │       ├── user-page2-page.component.ts
-│   │   │       │       └── user-page2-page.module.ts
-│   │   │       ├── user.pages.module.ts
-│   │   │       └── user.router.module.ts
 │   │   └── utils
 │   │       ├── database.types.ts
 │   │       └── initSupabase.ts
@@ -214,25 +149,128 @@ MqttDashboard
 └── tslint.json
 ```
 
-# External Software
 
-## Using AWS E2C IoT
+# How does it work?
 
+We can divide the features of our dashboard in two main categories:
 
+- End-user focused
+- Manifacturer focused
 
-### Setting up AWS for mosquitto
+Let's dive firstly into the first category with what a typical user does at it's first utilization and let's analyze it step by step:
 
-
-
-## Supabase
-
-# Usage
+Firstly the user is presented with a 6 digit pin, that is provided with the hub, that logs him in to the dashboard in which he has an overview all of the features available to him as shown in picture:
 
 
-# License
+## Register
 
+To register a device we must first connect to their Hub, in fact we send a request throught our MQTT. Here are the steps from the dashboard.
 
+| MQTT | From To  | Description |
+|---|---|---|
+| ` esp-firstConfiguration : { "mode" : "discovery" } ` | Dashboard &rarr; MQTT Broker &rarr; HUB |  This message is sent everytime the TinyCI Dashboard is looking for Hubs.|
+| `esp-firstConfiguration: { "device-name" : "ESP32" , "id" : "C0:49:EF:CD:20:CC" }`  | Hub &rarr; MQTT broker &rarr; Dashboard | Once recived the discovery message the Hub responds with its details ( `id` is the MAC address and  ` device-name` is set by the manifacturer).|
+| ` esp-C0:49:EF:CD:20:CC : { "mode" : "discovery" , "device" : "C0:49:EF:CD:20:CC" } ` | Dashboard &rarr; MQTT Broker &rarr; HUB | We set the topic to esp + hub.id and set it to discovery mode, so that the hub scans it's Wi-Fi network thourgh web sockets and returns the edge devices available.|
+| `esp-C0:49:EF:CD:20:CC : { "device-name" : "MSP432" , "id" : "C0:49:EF:CD:20:CC-MSP432", "status" : "registered" } ` | Hub &rarr; MQTT broker &rarr; Dashboard | Returns that the device has been registered to the user.|
 
+## Manage devices
 
-## MQTT Broker
+We also have the ability of managing devices, if the manifacturer has provided our propretary JSON file
+
+| MQTT | From To  | Description |
+|---|---|---|
+| ` esp-firstConfiguration : { "mode" : "discovery" } ` | Dashboard &rarr; MQTT Broker &rarr; HUB |  This message is sent everytime the TinyCI Dashboard is looking for Hubs.|
+| `esp-firstConfiguration: { "device-name" : "ESP32" , "id" : "C0:49:EF:CD:20:CC" }`  | Hub &rarr; MQTT broker &rarr; Dashboard | Once recived the discovery message the Hub responds with its details ( `id` is the MAC address and  ` device-name` is set by the manifacturer).|
+| ` esp-C0:49:EF:CD:20:CC : { "mode" : "discovery" , "device" : "C0:49:EF:CD:20:CC" } ` | Dashboard &rarr; MQTT Broker &rarr; HUB | We set the topic to esp + hub.id and set it to discovery mode, so that the hub scans it's Wi-Fi network thourgh web sockets and returns the edge devices available.|
+| `esp-C0:49:EF:CD:20:CC : { "device-name" : "MSP432" , "id" : "C0:49:EF:CD:20:CC-MSP432", "status" : "registered" } ` | Hub &rarr; MQTT broker &rarr; Dashboard | Returns that the device has been registered to the user.|
+
+## Live Data
+
+| MQTT | From To  | Description |
+|---|---|---|
+| ` esp-C0:49:EF:CD:20:CC : { "mode" : "discovery" } ` | Dashboard &rarr; MQTT Broker &rarr; HUB |  This message is sent everytime the TinyCI Dashboard is looking for Hubs.|
+| ` esp-C0:49:EF:CD:20:CCn: { "device-name" : "ESP32" , "id" : "C0:49:EF:CD:20:CC" }`  | Hub &rarr; MQTT broker &rarr; Dashboard | Once recived the discovery message the Hub responds with its details ( `id` is the MAC address and  ` device-name` is set by the manifacturer).|
+| ` esp-C0:49:EF:CD:20:CC : { "mode" : "discovery" , "device" : "C0:49:EF:CD:20:CC" } ` | Dashboard &rarr; MQTT Broker &rarr; HUB | We set the topic to esp + hub.id and set it to discovery mode, so that the hub scans it's Wi-Fi network thourgh web sockets and returns the edge devices available.|
+| `esp-C0:49:EF:CD:20:CC : { "device-name" : "MSP432" , "id" : "C0:49:EF:CD:20:CC-MSP432", "status" : "registered" } ` | Hub &rarr; MQTT broker &rarr; Dashboard | Returns that the device has been registered to the user.|
+
+## Board setup by manifacturer
+
+We give the manifacturer the ability to upload JSON files to let the user retrive data or send commands. The JSON stucture we came up with is preatty straightforward and is structured as it follows:
+
+``` bash
+
+{
+  "set": {},
+  "get": {
+    "sensors": [
+      {
+        "type": "temperatures",
+        "unit": "°C",
+        "y-axys": {
+          "min": 15,
+          "max": 50
+        }
+      },
+      {
+        "type": "lux",
+        "unit": "",
+        "y-axys": {
+          "min": 0,
+          "max": 500
+        }
+      }
+    ]
+  }
+}
+
+```
+As you can see above we have a the JSON for a device with a temperature sensor and a light one, the information contained is needed to create an adeguate data representation through charts.
+
+``` bash
+
+{
+  "set": {
+    "program_name": {
+      "type": "string",
+      "display_name": "Command",
+      "description": "Write a command to be executed on the selected device"
+    }
+  },
+  "get": {
+    "sensors": [
+      {
+        "type": "CPU",
+        "unit": "%",
+        "y-axys": {
+          "min": 0,
+          "max": 100
+        }
+      }
+    ]
+  }
+}
+
+```
+Here instead we can see one for a device that can also be controlled remotely.
+These JSON are read by the ESP32 to retrive data from it's network edge devices, for more information on these take a look at the README of the [TinyCI-Hub repo](https://github.com/matteogastaldello/TinyCI-HUB).
+
+# Problems during development
+
+The most challenging part of the develpoment has surely been the set up of the AWS instance and make it reliable enough to make the project feasible, also implementing remote compiling has been really challenging given that is not something the average developer does. 
+
+As far as more time consumimg tasks it was suerly planning, defining and implementing the data structure to use to better communicate with the Hub and the edge devices, but it was fundamental for the success of the project.
+
+# Authors
+Matteo Gastaldello
+
+Federico Natali
+
+Matteo Sabella
+
+# Acknowledgments
+
+<a href="https://www.unitn.it/">
+  <img src="/assets/logo_unitn_it.png" width="300px">
+</a>
+
 
