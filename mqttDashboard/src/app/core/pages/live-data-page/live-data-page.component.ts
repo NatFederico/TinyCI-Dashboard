@@ -109,7 +109,6 @@ export class LiveDataPageComponent implements OnInit {
         })
         this.loading = true;
         client.publish('esp-' + board.hub, JSON.stringify({ 'mode': 'get', 'device': board.name, 'stream': true }));
-        //client.publish('esp-' + board.hub, JSON.stringify({ 'mode': 'get', 'device': 'null', 'stream': true }));
         this.mqttHandler();
         if (this.boardFocus != null) {
             this.boardFocus = null;

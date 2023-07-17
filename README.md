@@ -175,25 +175,27 @@ To register a device we must first connect to their Hub, in fact we send a reque
 
 ## Manage devices
 
-We also have the ability of managing devices, if the manifacturer has provided our propretary JSON file
+We also have the ability of managing devices, if the manifacturer has provided our propretary JSON file. In case the device has a `set` function in the [provided JSON](#device-setup-by-manifacturer) we can send commands to the edge device as specified by the manifacturer. 
 
 | MQTT | From To  | Description |
 |---|---|---|
-| ` esp-firstConfiguration : { "mode" : "discovery" } ` | Dashboard &rarr; MQTT Broker &rarr; HUB |  This message is sent everytime the TinyCI Dashboard is looking for Hubs.|
-| `esp-firstConfiguration: { "device-name" : "ESP32" , "id" : "C0:49:EF:CD:20:CC" }`  | Hub &rarr; MQTT broker &rarr; Dashboard | Once recived the discovery message the Hub responds with its details ( `id` is the MAC address and  ` device-name` is set by the manifacturer).|
-| ` esp-C0:49:EF:CD:20:CC : { "mode" : "discovery" , "device" : "C0:49:EF:CD:20:CC" } ` | Dashboard &rarr; MQTT Broker &rarr; HUB | We set the topic to esp + hub.id and set it to discovery mode, so that the hub scans it's Wi-Fi network thourgh web sockets and returns the edge devices available.|
-| `esp-C0:49:EF:CD:20:CC : { "device-name" : "MSP432" , "id" : "C0:49:EF:CD:20:CC-MSP432", "status" : "registered" } ` | Hub &rarr; MQTT broker &rarr; Dashboard | Returns that the device has been registered to the user.|
+| ` esp-C0:49:EF:CD:20:CC : { "device" : "pc_service" , "mode" : "set" , "program" : "sl" } ` | Dashboard &rarr; MQTT Broker &rarr; Hub &rarr; Edge Device | Targeting the Hub's topic we set the mode to `set` so that it's ready to recive information and send, in this case, the command to execute by terminal.|
+
+While we tried to standardize everything we opted to not limit the possibilities of manifacturers and they can decide if other fields are needed.
 
 ## Live Data
 
+We also managed to show realtime data transmission: while we decided not to implement a continuos stream, so that the MQTT channel wouldn't be saturated, we decided to send an array of the latest data to then be computed by our dashboard as realtime data.
+
+For us it was a gamechanger and a feature we worked a lot on, but let's now see how we request data.
+
 | MQTT | From To  | Description |
 |---|---|---|
-| ` esp-C0:49:EF:CD:20:CC : { "mode" : "discovery" } ` | Dashboard &rarr; MQTT Broker &rarr; HUB |  This message is sent everytime the TinyCI Dashboard is looking for Hubs.|
-| ` esp-C0:49:EF:CD:20:CCn: { "device-name" : "ESP32" , "id" : "C0:49:EF:CD:20:CC" }`  | Hub &rarr; MQTT broker &rarr; Dashboard | Once recived the discovery message the Hub responds with its details ( `id` is the MAC address and  ` device-name` is set by the manifacturer).|
-| ` esp-C0:49:EF:CD:20:CC : { "mode" : "discovery" , "device" : "C0:49:EF:CD:20:CC" } ` | Dashboard &rarr; MQTT Broker &rarr; HUB | We set the topic to esp + hub.id and set it to discovery mode, so that the hub scans it's Wi-Fi network thourgh web sockets and returns the edge devices available.|
-| `esp-C0:49:EF:CD:20:CC : { "device-name" : "MSP432" , "id" : "C0:49:EF:CD:20:CC-MSP432", "status" : "registered" } ` | Hub &rarr; MQTT broker &rarr; Dashboard | Returns that the device has been registered to the user.|
+| ` esp-C0:49:EF:CD:20:CC : { "mode" : "get", "device" : "MSP432" , "stream" : true } ` | Dashboard &rarr; MQTT Broker &rarr; Hub &rarr; Edge device | After the user has selected a device we subscribe to its Hub topic and request data, in case on non-continuos data we can set stream to false.|
+| ` esp-C0:49:EF:CD:20:CCn: { "sensors" : [ { "temperatures" : [ 32.874, 33.760, 33.750, 32.987, 33.000 ]}, {"lux" : [ 230, 450, 23, 500, 235 ]} ], "success" : true  }`  | Edge device &rarr; Hub &rarr; MQTT broker &rarr; Dashboard | The response, in case is successful is a an array of sensors, which contains inside the latest five measured values, and keeps sending new ones until a new message is recived.|
+| ` esp-C0:49:EF:CD:20:CC : {  "sensors" : [], "success" : false } ` | Hub &rarr; MQTT broker &rarr; Dashboard | In case our Hub in unable to communicate with the target Edge device, responds with a `"success" : false` so to give a visual clue to the user that something went wrong.|
 
-## Board setup by manifacturer
+## Device setup by manifacturer
 
 We give the manifacturer the ability to upload JSON files to let the user retrive data or send commands. The JSON stucture we came up with is preatty straightforward and is structured as it follows:
 
@@ -253,6 +255,8 @@ As you can see above we have a the JSON for a device with a temperature sensor a
 ```
 Here instead we can see one for a device that can also be controlled remotely.
 These JSON are read by the ESP32 to retrive data from it's network edge devices, for more information on these take a look at the README of the [TinyCI-Hub repo](https://github.com/matteogastaldello/TinyCI-HUB).
+
+The manifacturer can update these files through our dedicated section in the dashboard.
 
 # Problems during development
 
