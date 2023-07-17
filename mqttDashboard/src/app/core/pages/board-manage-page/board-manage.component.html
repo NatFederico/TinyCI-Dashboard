@@ -4,8 +4,9 @@
     </div>
     <div class="col-md">
         <div class="btn-group">
-            <button type="button" class="btn btn-sm btn-primary" [routerLink]="['/dashboard']">Back to dashboard
-                <fa-icon icon="table-columns"></fa-icon></button>
+            <button [routerLink]="['/dashboard']" class="btn btn-sm btn-primary" type="button">Back to dashboard
+                <fa-icon icon="table-columns"></fa-icon>
+            </button>
         </div>
     </div>
 </div>
@@ -17,28 +18,28 @@
     <br>
 </div>
 <div *ngIf="boards && !sent">
-    <table class="table table-striped" *ngIf="boards.length > 0">
+    <table *ngIf="boards.length > 0" class="table table-striped">
         <tbody>
-            <tr *ngFor="let board of boards">
-                <td>
-                    <b>{{board.name}}</b>
-                    <br>
-                    <small class="text-muted">Hub: {{board.hub}}</small>
-                </td>
-                <td align="right">
-                    <button class="btn btn-primary" (click)="selectBoard(board)" *ngIf="board != focusBoard">Setup</button>
-                    <button class="btn btn-danger" (click)="exitSetup()" *ngIf="board == focusBoard">Close</button>
-                </td>
-            </tr>
+        <tr *ngFor="let board of boards">
+            <td>
+                <b>{{board.name}}</b>
+                <br>
+                <small class="text-muted">Hub: {{board.hub}}</small>
+            </td>
+            <td align="right">
+                <button (click)="selectBoard(board)" *ngIf="board != focusBoard" class="btn btn-primary">Setup</button>
+                <button (click)="exitSetup()" *ngIf="board == focusBoard" class="btn btn-danger">Close</button>
+            </td>
+        </tr>
         </tbody>
     </table>
     <h3 *ngIf="boards.length == 0">No device registered to user</h3>
     <div *ngIf="loaded && fields.length > 0">
         <h3 class="mb-3 pb-2 border-bottom border-light text-primary">{{focusBoard.name}}</h3>
         <div *ngFor="let field of names; let i = index;">
-                <label [attr.for]="field">{{ field | titlecase }}:</label>
-                <input type="text" class="form-control" [(ngModel)]="val[i]">
-                <small class="text-muted">{{desc[i]}}</small>
+            <label [attr.for]="field">{{ field | titlecase }}:</label>
+            <input [(ngModel)]="val[i]" class="form-control" type="text">
+            <small class="text-muted">{{desc[i]}}</small>
         </div>
         <br>
         <button (click)="send()" class="btn btn-primary">Submit</button>
@@ -51,8 +52,9 @@
 <div *ngIf="sent">
     <h3 class="text-success">Command sent successfully</h3>
     <div class="btn-group">
-        <button type="button" class="btn btn-sm btn-primary" [routerLink]="['/dashboard']">Go back to the dashboard
-            <fa-icon icon="table-columns"></fa-icon></button>
-        <button type="button" class="btn btn-secondary" (click)="refresh()">Send another one</button>
+        <button [routerLink]="['/dashboard']" class="btn btn-sm btn-primary" type="button">Go back to the dashboard
+            <fa-icon icon="table-columns"></fa-icon>
+        </button>
+        <button (click)="refresh()" class="btn btn-secondary" type="button">Send another one</button>
     </div>
 </div>

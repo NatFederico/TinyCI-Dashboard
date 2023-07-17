@@ -1,60 +1,60 @@
 {
-    "APP": {
-        "NOME": "TinyCI - Dashboard"
-    },
-    "APP_TS": {
-        "SESSIONE_TERMINATA_TITLE": "Sessione terminata",
-        "SESSIONE_TERMINATA_MESSAGE": "La sessione utente non è più attiva"
-    },
-    "MENU": {
-        "ACCEDI": "Accedi",
-        "HOME": "Home",
-        "LOGOUT": "Esci"
-    },
-    "HEADER": {
-        "LOGO_TITLE": "Università degli Studi di Trento",
-        "LOGO_LINK": "https://www.unitn.it",
-        "CULTURE_IT": "italiano (Italia)",
-        "CULTURE_EN": "English (United States)"
-    },
-    "FOOTER": {
-        "LOGO_TITLE": "Università degli Studi di Trento",
-        "PORTALE_LINK": "https://github.com/matteogastaldello/embedded-project",
-        "PRIVACY_LINK": "https://www.unitn.it/privacy",
-        "CASE_LINK": "https://icts.unitn.it/case",
-        "HELPDESK_LINK": "https://www.unitn.it/servicedesk/support",
-        "PORTALE_TEXT": "GitHub",
-        "PRIVACY_TEXT": "Privacy",
-        "CASE_TEXT": "Catalogo dei Servizi",
-        "HELPDESK_TEXT": "Helpdesk",
-        "SWITCHITA_TITLE": "Passa a versione italiana",
-        "SWITCHENG_TITLE": "Switch to English version"
-    },
-    "GUARD": {
-        "CORE": {
-            "USER": {
-                "NO_AUTHORIZATION_TITLE": "Attenzione",
-                "NO_AUTHORIZATION_MESSAGE": "Non sei autorizzato ad accedere"
-            }
-        }
-    },
-    "PAGE": {
-        "CORE": {
-            "WELCOME": {
-                "TITOLO": "Template",
-                "INTRO": "Questo è un template SPA"
-            }
-        },
-        "USER": {
-            "HOME": {
-                "TITOLO": "User HomePage"
-            },            
-            "PAGE1": {
-                "TITOLO": "User Pagina1"
-            },            
-            "PAGE2": {
-                "TITOLO": "User Pagina2"
-            }
-        }
+  "APP": {
+    "NOME": "TinyCI - Dashboard"
+  },
+  "APP_TS": {
+    "SESSIONE_TERMINATA_TITLE": "Sessione terminata",
+    "SESSIONE_TERMINATA_MESSAGE": "La sessione utente non è più attiva"
+  },
+  "MENU": {
+    "ACCEDI": "Accedi",
+    "HOME": "Home",
+    "LOGOUT": "Esci"
+  },
+  "HEADER": {
+    "LOGO_TITLE": "Università degli Studi di Trento",
+    "LOGO_LINK": "https://www.unitn.it",
+    "CULTURE_IT": "italiano (Italia)",
+    "CULTURE_EN": "English (United States)"
+  },
+  "FOOTER": {
+    "LOGO_TITLE": "Università degli Studi di Trento",
+    "PORTALE_LINK": "https://github.com/matteogastaldello/embedded-project",
+    "PRIVACY_LINK": "https://www.unitn.it/privacy",
+    "CASE_LINK": "https://icts.unitn.it/case",
+    "HELPDESK_LINK": "https://www.unitn.it/servicedesk/support",
+    "PORTALE_TEXT": "GitHub",
+    "PRIVACY_TEXT": "Privacy",
+    "CASE_TEXT": "Catalogo dei Servizi",
+    "HELPDESK_TEXT": "Helpdesk",
+    "SWITCHITA_TITLE": "Passa a versione italiana",
+    "SWITCHENG_TITLE": "Switch to English version"
+  },
+  "GUARD": {
+    "CORE": {
+      "USER": {
+        "NO_AUTHORIZATION_TITLE": "Attenzione",
+        "NO_AUTHORIZATION_MESSAGE": "Non sei autorizzato ad accedere"
+      }
     }
+  },
+  "PAGE": {
+    "CORE": {
+      "WELCOME": {
+        "TITOLO": "Template",
+        "INTRO": "Questo è un template SPA"
+      }
+    },
+    "USER": {
+      "HOME": {
+        "TITOLO": "User HomePage"
+      },
+      "PAGE1": {
+        "TITOLO": "User Pagina1"
+      },
+      "PAGE2": {
+        "TITOLO": "User Pagina2"
+      }
+    }
+  }
 }

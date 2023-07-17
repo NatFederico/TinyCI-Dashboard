@@ -4,25 +4,26 @@
     </div>
     <div class="col-md">
         <div class="btn-group">
-            <button type="button" class="btn btn-sm btn-primary" [routerLink]="['/dashboard']">Back to dashboard
-                <fa-icon icon="table-columns"></fa-icon></button>
+            <button [routerLink]="['/dashboard']" class="btn btn-sm btn-primary" type="button">Back to dashboard
+                <fa-icon icon="table-columns"></fa-icon>
+            </button>
         </div>
     </div>
 </div>
 <h4>Select preferred device to see available live data</h4>
-<table class="table table-striped" *ngIf="boards.length > 0">
+<table *ngIf="boards.length > 0" class="table table-striped">
     <tbody>
-        <tr *ngFor="let b of boards">
-            <td>
-                <b>{{b.name}}</b>
-                <br>
-                <small class="text-muted">Hub: {{b.hub}}</small>
-            </td>
-            <td align="right">
-                <button *ngIf="!boardIsfocused(b)" class="btn btn-primary" (click)="selectBoard(b)">Watch</button>
-                <button *ngIf="boardIsfocused(b)" class="btn btn-danger" (click)="unwatch()">Close</button>
-            </td>
-        </tr>
+    <tr *ngFor="let b of boards">
+        <td>
+            <b>{{b.name}}</b>
+            <br>
+            <small class="text-muted">Hub: {{b.hub}}</small>
+        </td>
+        <td align="right">
+            <button (click)="selectBoard(b)" *ngIf="!boardIsfocused(b)" class="btn btn-primary">Watch</button>
+            <button (click)="unwatch()" *ngIf="boardIsfocused(b)" class="btn btn-danger">Close</button>
+        </td>
+    </tr>
     </tbody>
 </table>
 <h3 *ngIf="boards.length == 0">No devices registered to user</h3>
@@ -35,9 +36,10 @@
 </div>
 <div *ngIf="loaded && !DataError">
     <div class="row">
-        <div class="col md-6" *ngFor="let sensor of boardFocus.sensors">
+        <div *ngFor="let sensor of boardFocus.sensors" class="col md-6">
             <h3 class="mb-3 text-primary">{{sensor.type | titlecase}}</h3>
-            <ngx-realtime-chart [options]="sensor.realtimeOption" [data]="sensor.realtimeChartData"></ngx-realtime-chart>
+            <ngx-realtime-chart [data]="sensor.realtimeChartData"
+                                [options]="sensor.realtimeOption"></ngx-realtime-chart>
             <small class="text-muted">Average : {{ averageData(sensor) }}</small>
         </div>
     </div>

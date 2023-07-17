@@ -1,14 +1,13 @@
-import { HttpClient } from "@angular/common/http";
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { initSupabase } from "src/app/utils/initSupabase";
-import { createClient, SupabaseClient } from '@supabase/supabase-js'
-import { Database } from "src/app/utils/database.types";
+import {HttpClient} from "@angular/common/http";
+import {Component, OnDestroy, OnInit} from "@angular/core";
+import {initSupabase} from "src/app/utils/initSupabase";
+import {createClient} from '@supabase/supabase-js'
+import {Database} from "src/app/utils/database.types";
 import * as mqtt from 'mqtt/dist/mqtt.js';
-import { Field, FieldDescription } from "../../models/api/field.model";
-import { find, forEach } from "lodash";
-import { fi, te } from "date-fns/locale";
-import { Board } from "../../models/api/board.model";
-import { Firmware } from "../../models/api/firmware.model";
+import {FieldDescription} from "../../models/api/field.model";
+import {find, forEach} from "lodash";
+import {Board} from "../../models/api/board.model";
+import {Firmware} from "../../models/api/firmware.model";
 
 const supabase = createClient<Database>(
     initSupabase.supabaseUrl,
@@ -36,7 +35,8 @@ export class BoardManageComponent implements OnInit, OnDestroy {
     firmware: Firmware[] = [];
     index = 0;
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+    }
 
     ngOnInit() {
         client.on('connect', function () {
@@ -58,11 +58,11 @@ export class BoardManageComponent implements OnInit, OnDestroy {
     }
 
     async getFields() {
-        const { data: test, error } = await supabase
+        const {data: test, error} = await supabase
             .from('boards')
             .select();
         this.boards = test;
-        const { data: firmware } = await supabase
+        const {data: firmware} = await supabase
             .from('producer')
             .select();
         this.firmware = firmware;
@@ -101,11 +101,15 @@ export class BoardManageComponent implements OnInit, OnDestroy {
     }
 
     send() {
-        client.publish('esp-' + this.focusBoard.hub, JSON.stringify({'device': this.focusBoard.name ,'mode': 'set', 'program': this.val[0] }));
+        client.publish('esp-' + this.focusBoard.hub, JSON.stringify({
+            'device': this.focusBoard.name,
+            'mode': 'set',
+            'program': this.val[0]
+        }));
         this.sent = true;
     }
 
-    refresh(){
+    refresh() {
         window.location.reload();
     }
 }

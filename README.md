@@ -2,30 +2,46 @@
 
 # Description
 
-Our Dashboard works as an interface for the user to interact with your Hubs and devices, and a way for our device manufacturer to set configuration files to add capabilities and/or sensors to their devices giving a better experinece to the end user.
-All of this is powered by an Angular Single Page Application, written in typescript and an AWS IoT server running Mosquitto.
+Our Dashboard works as an interface for the user to interact with your Hubs and devices, and a way for our device
+manufacturer to set configuration files to add capabilities and/or sensors to their devices giving a better experinece
+to the end user.
+All of this is powered by an Angular Single Page Application, written in typescript and an AWS IoT server running
+Mosquitto.
 
 # Requirements
 
 To run this software you'll need:
+
 - A MQTT broker.
 - An ESP32 running the [esp32-homebridge](https://github.com/matteogastaldello/esp32-HomeBridge).
 
 For the edge-devices to be connected you can reference the HomeBridge README.
 
-You'll also need `Angular CLI` installed on your device to run the dashboard locally, otherwise you can deploy - with little to no modifications - this repo on [Vercel](vercel.com).
+You'll also need `Angular CLI` installed on your device to run the dashboard locally, otherwise you can deploy - with
+little to no modifications - this repo on [Vercel](vercel.com).
 
 # Technologies
 
-With this state of the art platform we implemented a refined UX for the end user, as well as the edge device manifacturer. Using our mosquitto instance, that's running on our AWS E2C IoT instance with Ubuntu 22.04, we're able to connect to our edge-devices, get data and send commands from anywhere in the world.
+With this state of the art platform we implemented a refined UX for the end user, as well as the edge device
+manifacturer. Using our mosquitto instance, that's running on our AWS E2C IoT instance with Ubuntu 22.04, we're able to
+connect to our edge-devices, get data and send commands from anywhere in the world.
 
 ## MQTT broker and AWS
 
-It was imperative for our communication system to be as easy to use for the end users as possibile, thats why we decided to setup a our own remote broker using [mosquitto](https://mosquitto.org/) running on an AWS instance with Ubuntu 22.04 as OS. We decided to use mosquitto not only beacuse we got to know it during class, but also because it was one of the few lightweight but efficient solutions we were able to find, giving us the performance we needed without consuming a high volume of resources.
+It was imperative for our communication system to be as easy to use for the end users as possibile, thats why we decided
+to setup a our own remote broker using [mosquitto](https://mosquitto.org/) running on an AWS instance with Ubuntu 22.04
+as OS. We decided to use mosquitto not only beacuse we got to know it during class, but also because it was one of the
+few lightweight but efficient solutions we were able to find, giving us the performance we needed without consuming a
+high volume of resources.
 
 ### Why AWS?
 
-When we firstly started this project we planned on a featuring OTA (over the air updates) and after a lot of reaserch on how to best implement it we decided on AWS E2C IoT, which are instances configure with the purpose of IoT applications. After a lot of troubleshooting on making the broker properly work, we started working on a piece of custom software that was able to get any .ino/.c/.cpp compile it, link it and send the binary file back to the device but was then put on hold to concentrate on the main focus of the project, given that ammount of work was enormous, but we could consider it for feature improvements.
+When we firstly started this project we planned on a featuring OTA (over the air updates) and after a lot of reaserch on
+how to best implement it we decided on AWS E2C IoT, which are instances configure with the purpose of IoT applications.
+After a lot of troubleshooting on making the broker properly work, we started working on a piece of custom software that
+was able to get any .ino/.c/.cpp compile it, link it and send the binary file back to the device but was then put on
+hold to concentrate on the main focus of the project, given that ammount of work was enormous, but we could consider it
+for feature improvements.
 
 # Project Layout
 
@@ -149,7 +165,6 @@ MqttDashboard
 └── tslint.json
 ```
 
-
 # How does it work?
 
 We can divide the features of our dashboard in two main categories:
@@ -157,47 +172,55 @@ We can divide the features of our dashboard in two main categories:
 - End-user focused
 - Manifacturer focused
 
-Let's dive firstly into the first category with what a typical user does at it's first utilization and let's analyze it step by step:
+Let's dive firstly into the first category with what a typical user does at it's first utilization and let's analyze it
+step by step:
 
-Firstly the user is presented with a 6 digit pin, that is provided with the hub, that logs him in to the dashboard in which he has an overview all of the features available to him as shown in picture:
-
+Firstly the user is presented with a 6 digit pin, that is provided with the hub, that logs him in to the dashboard in
+which he has an overview all of the features available to him as shown in picture:
 
 ## Register
 
-To register a device we must first connect to their Hub, in fact we send a request throught our MQTT. Here are the steps from the dashboard.
+To register a device we must first connect to their Hub, in fact we send a request throught our MQTT. Here are the steps
+from the dashboard.
 
-| MQTT | From To  | Description |
-|---|---|---|
-| ` esp-firstConfiguration : { "mode" : "discovery" } ` | Dashboard &rarr; MQTT Broker &rarr; HUB |  This message is sent everytime the TinyCI Dashboard is looking for Hubs.|
-| `esp-firstConfiguration: { "device-name" : "ESP32" , "id" : "C0:49:EF:CD:20:CC" }`  | Hub &rarr; MQTT broker &rarr; Dashboard | Once recived the discovery message the Hub responds with its details ( `id` is the MAC address and  ` device-name` is set by the manifacturer).|
-| ` esp-C0:49:EF:CD:20:CC : { "mode" : "discovery" , "device" : "C0:49:EF:CD:20:CC" } ` | Dashboard &rarr; MQTT Broker &rarr; HUB | We set the topic to esp + hub.id and set it to discovery mode, so that the hub scans it's Wi-Fi network thourgh web sockets and returns the edge devices available.|
-| `esp-C0:49:EF:CD:20:CC : { "device-name" : "MSP432" , "id" : "C0:49:EF:CD:20:CC-MSP432", "status" : "registered" } ` | Hub &rarr; MQTT broker &rarr; Dashboard | Returns that the device has been registered to the user.|
+| MQTT                                                                                                                 | From To                                 | Description                                                                                                                                                         |
+|----------------------------------------------------------------------------------------------------------------------|-----------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ` esp-firstConfiguration : { "mode" : "discovery" } `                                                                | Dashboard &rarr; MQTT Broker &rarr; HUB | This message is sent everytime the TinyCI Dashboard is looking for Hubs.                                                                                            |
+| `esp-firstConfiguration: { "device-name" : "ESP32" , "id" : "C0:49:EF:CD:20:CC" }`                                   | Hub &rarr; MQTT broker &rarr; Dashboard | Once recived the discovery message the Hub responds with its details ( `id` is the MAC address and  ` device-name` is set by the manifacturer).                     |
+| ` esp-C0:49:EF:CD:20:CC : { "mode" : "discovery" , "device" : "C0:49:EF:CD:20:CC" } `                                | Dashboard &rarr; MQTT Broker &rarr; HUB | We set the topic to esp + hub.id and set it to discovery mode, so that the hub scans it's Wi-Fi network thourgh web sockets and returns the edge devices available. |
+| `esp-C0:49:EF:CD:20:CC : { "device-name" : "MSP432" , "id" : "C0:49:EF:CD:20:CC-MSP432", "status" : "registered" } ` | Hub &rarr; MQTT broker &rarr; Dashboard | Returns that the device has been registered to the user.                                                                                                            |
 
 ## Manage devices
 
-We also have the ability of managing devices, if the manifacturer has provided our propretary JSON file. In case the device has a `set` function in the [provided JSON](#device-setup-by-manifacturer) we can send commands to the edge device as specified by the manifacturer. 
+We also have the ability of managing devices, if the manifacturer has provided our propretary JSON file. In case the
+device has a `set` function in the [provided JSON](#device-setup-by-manifacturer) we can send commands to the edge
+device as specified by the manifacturer.
 
-| MQTT | From To  | Description |
-|---|---|---|
-| ` esp-C0:49:EF:CD:20:CC : { "device" : "pc_service" , "mode" : "set" , "program" : "sl" } ` | Dashboard &rarr; MQTT Broker &rarr; Hub &rarr; Edge Device | Targeting the Hub's topic we set the mode to `set` so that it's ready to recive information and send, in this case, the command to execute by terminal.|
+| MQTT                                                                                        | From To                                                    | Description                                                                                                                                             |
+|---------------------------------------------------------------------------------------------|------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ` esp-C0:49:EF:CD:20:CC : { "device" : "pc_service" , "mode" : "set" , "program" : "sl" } ` | Dashboard &rarr; MQTT Broker &rarr; Hub &rarr; Edge Device | Targeting the Hub's topic we set the mode to `set` so that it's ready to recive information and send, in this case, the command to execute by terminal. |
 
-While we tried to standardize everything we opted to not limit the possibilities of manifacturers and they can decide if other fields are needed.
+While we tried to standardize everything we opted to not limit the possibilities of manifacturers and they can decide if
+other fields are needed.
 
 ## Live Data
 
-We also managed to show realtime data transmission: while we decided not to implement a continuos stream, so that the MQTT channel wouldn't be saturated, we decided to send an array of the latest data to then be computed by our dashboard as realtime data.
+We also managed to show realtime data transmission: while we decided not to implement a continuos stream, so that the
+MQTT channel wouldn't be saturated, we decided to send an array of the latest data to then be computed by our dashboard
+as realtime data.
 
 For us it was a gamechanger and a feature we worked a lot on, but let's now see how we request data.
 
-| MQTT | From To  | Description |
-|---|---|---|
-| ` esp-C0:49:EF:CD:20:CC : { "mode" : "get", "device" : "MSP432" , "stream" : true } ` | Dashboard &rarr; MQTT Broker &rarr; Hub &rarr; Edge device | After the user has selected a device we subscribe to its Hub topic and request data, in case on non-continuos data we can set stream to false.|
-| ` esp-C0:49:EF:CD:20:CCn: { "sensors" : [ { "temperatures" : [ 32.874, 33.760, 33.750, 32.987, 33.000 ]}, {"lux" : [ 230, 450, 23, 500, 235 ]} ], "success" : true  }`  | Edge device &rarr; Hub &rarr; MQTT broker &rarr; Dashboard | The response, in case is successful is a an array of sensors, which contains inside the latest five measured values, and keeps sending new ones until a new message is recived.|
-| ` esp-C0:49:EF:CD:20:CC : {  "sensors" : [], "success" : false } ` | Hub &rarr; MQTT broker &rarr; Dashboard | In case our Hub in unable to communicate with the target Edge device, responds with a `"success" : false` so to give a visual clue to the user that something went wrong.|
+| MQTT                                                                                                                                                                   | From To                                                    | Description                                                                                                                                                                     |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ` esp-C0:49:EF:CD:20:CC : { "mode" : "get", "device" : "MSP432" , "stream" : true } `                                                                                  | Dashboard &rarr; MQTT Broker &rarr; Hub &rarr; Edge device | After the user has selected a device we subscribe to its Hub topic and request data, in case on non-continuos data we can set stream to false.                                  |
+| ` esp-C0:49:EF:CD:20:CCn: { "sensors" : [ { "temperatures" : [ 32.874, 33.760, 33.750, 32.987, 33.000 ]}, {"lux" : [ 230, 450, 23, 500, 235 ]} ], "success" : true  }` | Edge device &rarr; Hub &rarr; MQTT broker &rarr; Dashboard | The response, in case is successful is a an array of sensors, which contains inside the latest five measured values, and keeps sending new ones until a new message is recived. |
+| ` esp-C0:49:EF:CD:20:CC : {  "sensors" : [], "success" : false } `                                                                                                     | Hub &rarr; MQTT broker &rarr; Dashboard                    | In case our Hub in unable to communicate with the target Edge device, responds with a `"success" : false` so to give a visual clue to the user that something went wrong.       |
 
 ## Device setup by manifacturer
 
-We give the manifacturer the ability to upload JSON files to let the user retrive data or send commands. The JSON stucture we came up with is preatty straightforward and is structured as it follows:
+We give the manifacturer the ability to upload JSON files to let the user retrive data or send commands. The JSON
+stucture we came up with is preatty straightforward and is structured as it follows:
 
 ``` bash
 
@@ -226,7 +249,9 @@ We give the manifacturer the ability to upload JSON files to let the user retriv
 }
 
 ```
-As you can see above we have a the JSON for a device with a temperature sensor and a light one, the information contained is needed to create an adeguate data representation through charts.
+
+As you can see above we have a the JSON for a device with a temperature sensor and a light one, the information
+contained is needed to create an adeguate data representation through charts.
 
 ``` bash
 
@@ -253,18 +278,24 @@ As you can see above we have a the JSON for a device with a temperature sensor a
 }
 
 ```
+
 Here instead we can see one for a device that can also be controlled remotely.
-These JSON are read by the ESP32 to retrive data from it's network edge devices, for more information on these take a look at the README of the [TinyCI-Hub repo](https://github.com/matteogastaldello/TinyCI-HUB).
+These JSON are read by the ESP32 to retrive data from it's network edge devices, for more information on these take a
+look at the README of the [TinyCI-Hub repo](https://github.com/matteogastaldello/TinyCI-HUB).
 
 The manifacturer can update these files through our dedicated section in the dashboard.
 
 # Problems during development
 
-The most challenging part of the develpoment has surely been the set up of the AWS instance and make it reliable enough to make the project feasible, also implementing remote compiling has been really challenging given that is not something the average developer does. 
+The most challenging part of the develpoment has surely been the set up of the AWS instance and make it reliable enough
+to make the project feasible, also implementing remote compiling has been really challenging given that is not something
+the average developer does.
 
-As far as more time consumimg tasks it was suerly planning, defining and implementing the data structure to use to better communicate with the Hub and the edge devices, but it was fundamental for the success of the project.
+As far as more time consumimg tasks it was suerly planning, defining and implementing the data structure to use to
+better communicate with the Hub and the edge devices, but it was fundamental for the success of the project.
 
 # Authors
+
 Matteo Gastaldello
 
 Federico Natali

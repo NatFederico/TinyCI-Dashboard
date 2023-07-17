@@ -1,46 +1,52 @@
 <h1 class="mb-3 pb-2 border-bottom border-light text-primary">Dashboard</h1>
 <div class="row mb-3">
-  <div class="col-md-6 my-1">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title"><i class="bi bi-ticket-detailed"></i>My edge devices</h5>
-        <p class="card-text">Connect and setup the Edge devices</p>
-      </div>
-      <div class="card-footer text-muted text-end">
-        <div class="btn-group">
-          <button type="button" class="btn btn-sm btn-primary" [routerLink]="['/manage']">Manage <fa-icon
-              icon="pen-to-square"></fa-icon></button>
+    <div class="col-md-6 my-1">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-ticket-detailed"></i>My edge devices</h5>
+                <p class="card-text">Connect and setup the Edge devices</p>
+            </div>
+            <div class="card-footer text-muted text-end">
+                <div class="btn-group">
+                    <button [routerLink]="['/manage']" class="btn btn-sm btn-primary" type="button">Manage
+                        <fa-icon
+                                icon="pen-to-square"></fa-icon>
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="col-md-6 my-1">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title"><i class="bi bi-ticket-detailed"></i>Register Hubs or Edge devices</h5>
-        <p class="card-text">Register a new Hub or Edge device</p>
-      </div>
-      <div class="card-footer text-muted text-end">
-        <div class="btn-group">
-          <button type="button" class="btn btn-sm btn-primary" [routerLink]="['/template']">Add devices <fa-icon
-            icon="layer-group"></fa-icon></button>
+    <div class="col-md-6 my-1">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-ticket-detailed"></i>Register Hubs or Edge devices</h5>
+                <p class="card-text">Register a new Hub or Edge device</p>
+            </div>
+            <div class="card-footer text-muted text-end">
+                <div class="btn-group">
+                    <button [routerLink]="['/template']" class="btn btn-sm btn-primary" type="button">Add devices
+                        <fa-icon
+                                icon="layer-group"></fa-icon>
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 <div class="row-mb 3">
-  <div class="col-md-6 my-1">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title"><i class="bi bi-ticket-detailed"></i>Live Data</h5>
-        <p class="card-text">See live data from edge devices</p>
-      </div>
-      <div class="card-footer text-muted text-end">
-        <div class="btn-group">
-          <button type="button" class="btn btn-sm btn-primary" [routerLink]="['/live']">Data <fa-icon icon="wifi"></fa-icon></button>
+    <div class="col-md-6 my-1">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-ticket-detailed"></i>Live Data</h5>
+                <p class="card-text">See live data from edge devices</p>
+            </div>
+            <div class="card-footer text-muted text-end">
+                <div class="btn-group">
+                    <button [routerLink]="['/live']" class="btn btn-sm btn-primary" type="button">Data
+                        <fa-icon icon="wifi"></fa-icon>
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>

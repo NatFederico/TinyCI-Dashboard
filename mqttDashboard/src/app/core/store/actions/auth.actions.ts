@@ -1,5 +1,5 @@
-import { props, createAction } from '@ngrx/store';
-import { User } from 'oidc-client';
+import {createAction, props} from '@ngrx/store';
+import {User} from 'oidc-client';
 
 export enum AuthActionTypes {
     LOAD_FROM_STORAGE_SUCCESS = '[Auth] Load user from storage success',
@@ -15,7 +15,7 @@ export enum AuthActionTypes {
 
 export const loadFromStorageSuccess = createAction(
     AuthActionTypes.LOAD_FROM_STORAGE_SUCCESS,
-    props<{user: User}>()
+    props<{ user: User }>()
 );
 
 export const loadFromStorageFail = createAction(
@@ -24,7 +24,7 @@ export const loadFromStorageFail = createAction(
 
 export const loginSuccess = createAction(
     AuthActionTypes.SIGN_IN_SUCCESS,
-    props<{user: User}>()
+    props<{ user: User }>()
 );
 
 export const loginFail = createAction(
@@ -41,7 +41,7 @@ export const logoutFail = createAction(
 
 export const refreshSuccess = createAction(
     AuthActionTypes.REFRESH_SUCCESS,
-    props<{user: User}>()
+    props<{ user: User }>()
 );
 
 export const refreshFail = createAction(

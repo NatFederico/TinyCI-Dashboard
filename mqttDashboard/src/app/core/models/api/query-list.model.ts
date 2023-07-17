@@ -1,4 +1,4 @@
-import { QueryModel } from "./query.model";
+import {QueryModel} from "./query.model";
 
 export class QueryListModel<T> extends QueryModel {
     items: T[];

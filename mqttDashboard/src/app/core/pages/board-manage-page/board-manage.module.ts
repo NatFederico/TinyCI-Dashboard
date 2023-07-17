@@ -1,10 +1,10 @@
-import { CommonModule } from "@angular/common";
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
-import { TranslateModule } from "@ngx-translate/core";
-import { BoardManageComponent } from "./board-manage.component";
-import { FormsModule } from "@angular/forms";
-import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import {CommonModule} from "@angular/common";
+import {NgModule} from "@angular/core";
+import {RouterModule, Routes} from "@angular/router";
+import {TranslateModule} from "@ngx-translate/core";
+import {BoardManageComponent} from "./board-manage.component";
+import {FormsModule} from "@angular/forms";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 const routes: Routes = [
     {
@@ -23,4 +23,5 @@ const routes: Routes = [
     ],
     declarations: [BoardManageComponent]
 })
-export class BoardManageModule {}
+export class BoardManageModule {
+}

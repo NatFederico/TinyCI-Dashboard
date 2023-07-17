@@ -1,7 +1,7 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
-import { CoreRouterModule } from './core.router.module';
+import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
+import {TranslateModule} from '@ngx-translate/core';
+import {CoreRouterModule} from './core.router.module';
 
 @NgModule({
     declarations: [],
@@ -11,4 +11,5 @@ import { CoreRouterModule } from './core.router.module';
         TranslateModule.forChild()
     ]
 })
-  export class CorePagesModule { }
+export class CorePagesModule {
+}

@@ -1,45 +1,50 @@
 <header>
-  <div class="top">
-      <div class="container">
-          <div class="row">
-              <div class="col-md logo">
-                  <a href="{{ 'HEADER.LOGO_LINK' | translate }}" title="{{ 'HEADER.LOGO_TITLE' | translate }}">
-                      <img src="/assets/images/header_logo_unitn_{{lang}}.png" title="{{ 'HEADER.LOGO_TITLE' | translate }}" alt="{{ 'HEADER.LOGO_TITLE' | translate }}"/>
-                  </a>
-              </div>
-              <div class="col-md"></div>
-              <div class="col-md text-right">
-              </div>
-          </div>
-      </div>
-  </div>
-  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-primary border-bottom box-shadow mb-3">
-      <div class="container">
-          <a class="navbar-brand text-white" [routerLink]="['/welcome']">{{ 'APP.NOME' | translate }}</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                  aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-            <ul class="navbar-nav flex-grow-1">
-              <li class="nav-item" *ngIf="isAutenticato" [routerLinkActive]="['active']">
-                <a class="nav-link text-white" [routerLink]="['/user']" [title]="'MENU.HOME' | translate" data-toggle="collapse" data-target="#navbarSupportedContent">
-                  {{ 'MENU.HOME' | translate }}
-                </a>
-              </li>
-            </ul>
-            <ul class="navbar-nav">
-              <li *ngIf="isAutenticato" class="nav-item dropdown" id="userDropdown">
-                <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="dropdown">{{profile.name}}</a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a class="dropdown-item" (click)="logout()" [title]="'MENU.LOGOUT' | translate">{{ 'MENU.LOGOUT' | translate }}
+    <div class="top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md logo">
+                    <a href="{{ 'HEADER.LOGO_LINK' | translate }}" title="{{ 'HEADER.LOGO_TITLE' | translate }}">
+                        <img alt="{{ 'HEADER.LOGO_TITLE' | translate }}"
+                             src="/assets/images/header_logo_unitn_{{lang}}.png" title="{{ 'HEADER.LOGO_TITLE' | translate }}"/>
                     </a>
-                  </li>
+                </div>
+                <div class="col-md"></div>
+                <div class="col-md text-right">
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-primary border-bottom box-shadow mb-3">
+        <div class="container">
+            <a [routerLink]="['/welcome']" class="navbar-brand text-white">{{ 'APP.NOME' | translate }}</a>
+            <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+                    data-bs-target=".navbar-collapse"
+                    data-bs-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li *ngIf="isAutenticato" [routerLinkActive]="['active']" class="nav-item">
+                        <a [routerLink]="['/user']" [title]="'MENU.HOME' | translate" class="nav-link text-white"
+                           data-target="#navbarSupportedContent" data-toggle="collapse">
+                            {{ 'MENU.HOME' | translate }}
+                        </a>
+                    </li>
                 </ul>
-              </li>
-            </ul>
-          </div>
-      </div>
-  </nav>
+                <ul class="navbar-nav">
+                    <li *ngIf="isAutenticato" class="nav-item dropdown" id="userDropdown">
+                        <a class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown"
+                           href="#">{{profile.name}}</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a (click)="logout()" [title]="'MENU.LOGOUT' | translate"
+                                   class="dropdown-item">{{ 'MENU.LOGOUT' | translate }}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 </header>

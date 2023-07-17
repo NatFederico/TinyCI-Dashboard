@@ -1,14 +1,14 @@
-import { CommonModule } from "@angular/common";
-import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
-import { RouterModule, Routes } from "@angular/router";
-import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { TranslateModule } from "@ngx-translate/core";
-import { BoardSetupComponent } from "./board-setup.component";
+import {CommonModule} from "@angular/common";
+import {NgModule} from "@angular/core";
+import {FormsModule} from "@angular/forms";
+import {RouterModule, Routes} from "@angular/router";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {TranslateModule} from "@ngx-translate/core";
+import {BoardSetupComponent} from "./board-setup.component";
 
 const routes: Routes = [
     {
-        path:'',
+        path: '',
         component: BoardSetupComponent
     }
 ];
@@ -23,4 +23,5 @@ const routes: Routes = [
     ],
     declarations: [BoardSetupComponent]
 })
-export class BoardSetupModule {}
+export class BoardSetupModule {
+}

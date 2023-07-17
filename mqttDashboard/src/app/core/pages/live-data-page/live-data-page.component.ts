@@ -1,17 +1,15 @@
-import { Component, OnInit } from "@angular/core";
-import { createClient } from "@supabase/supabase-js";
-import { Database } from "src/app/utils/database.types";
-import { initSupabase } from "src/app/utils/initSupabase";
+import {Component, OnInit} from "@angular/core";
+import {createClient} from "@supabase/supabase-js";
+import {Database} from "src/app/utils/database.types";
+import {initSupabase} from "src/app/utils/initSupabase";
 import * as mqtt from 'mqtt/dist/mqtt.js';
-import { HttpClient } from "@angular/common/http";
-import { find, forEach } from "lodash";
-import { Board } from "../../models/api/board.model";
-import { Field } from "../../models/api/field.model";
-import { Firmware } from "../../models/api/firmware.model";
-import { interval } from 'rxjs';
-import { timeInterval } from 'rxjs/operators';
-import { DataService } from "../../services/data.service";
-import { BoardSensors, Sensor } from "../../models/api/boardSensors.model";
+import {HttpClient} from "@angular/common/http";
+import {find, forEach} from "lodash";
+import {Board} from "../../models/api/board.model";
+import {Field} from "../../models/api/field.model";
+import {Firmware} from "../../models/api/firmware.model";
+import {DataService} from "../../services/data.service";
+import {BoardSensors, Sensor} from "../../models/api/boardSensors.model";
 
 const supabase = createClient<Database>(
     initSupabase.supabaseUrl,
@@ -39,7 +37,8 @@ export class LiveDataPageComponent implements OnInit {
     DataError: boolean = false;
     flag: boolean = false;
 
-    constructor(private http: HttpClient, private data: DataService) { }
+    constructor(private http: HttpClient, private data: DataService) {
+    }
 
     ngOnInit() {
         client.on('connect', function () {
@@ -54,11 +53,11 @@ export class LiveDataPageComponent implements OnInit {
     }
 
     async getFields() {
-        const { data: test, error } = await supabase
+        const {data: test, error} = await supabase
             .from('boards')
             .select();
         this.boards = test;
-        const { data: firmware } = await supabase
+        const {data: firmware} = await supabase
             .from('producer')
             .select();
         this.firmware = firmware;
@@ -108,7 +107,7 @@ export class LiveDataPageComponent implements OnInit {
             }
         })
         this.loading = true;
-        client.publish('esp-' + board.hub, JSON.stringify({ 'mode': 'get', 'device': board.name, 'stream': true }));
+        client.publish('esp-' + board.hub, JSON.stringify({'mode': 'get', 'device': board.name, 'stream': true}));
         this.mqttHandler();
         if (this.boardFocus != null) {
             this.boardFocus = null;
@@ -124,7 +123,7 @@ export class LiveDataPageComponent implements OnInit {
                 for (const key in jsonObject) {
                     if (jsonObject.hasOwnProperty(key)) {
                         const element = jsonObject[key];
-                        this.fields.push({ [key]: element });
+                        this.fields.push({[key]: element});
                     }
                 }
             }
@@ -176,10 +175,10 @@ export class LiveDataPageComponent implements OnInit {
                                     sum += +value2;
                                 });
                                 let avg = sum / jsonSens[value.type].length;
-                                value.realtimeChartData[0].push({ date: new Date(), value: avg });
+                                value.realtimeChartData[0].push({date: new Date(), value: avg});
                             } else {
-                                sum = parseFloat(jsonSens[value.type])*100;
-                                value.realtimeChartData[0].push({ date: new Date(), value: sum });
+                                sum = parseFloat(jsonSens[value.type]) * 100;
+                                value.realtimeChartData[0].push({date: new Date(), value: sum});
                             }
                         }
                     });

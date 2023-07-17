@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0491dad4-62dd-43a7-8fcc-6801da3720e6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/e2e/protractor.conf.js" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/e2e/protractor.conf.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/e2e/src/app.e2e-spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/e2e/src/app.e2e-spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/e2e/src/app.po.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/e2e/src/app.po.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/karma.conf.js" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/karma.conf.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/app.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/app.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/components/footer-partial/footer-partial.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/components/footer-partial/footer-partial.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/components/footer-partial/footer-partial.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/components/footer-partial/footer-partial.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/components/footer-partial/footer-partial.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/components/footer-partial/footer-partial.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/components/footer-partial/footer-partial.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/components/footer-partial/footer-partial.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/components/header-partial/header-partial.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/components/header-partial/header-partial.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/components/header-partial/header-partial.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/components/header-partial/header-partial.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/components/header-partial/header-partial.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/components/header-partial/header-partial.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/components/header-partial/header-partial.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/components/header-partial/header-partial.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/core.pages.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/core.pages.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/core.router.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/core.router.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/guards/user.guard.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/guards/user.guard.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/guards/user.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/guards/user.guard.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/interceptors/http-header.interceptor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/interceptors/http-header.interceptor.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/interceptors/http-retry.interceptor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/interceptors/http-retry.interceptor.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/models/api/board.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/models/api/board.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/models/api/boardSensors.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/models/api/boardSensors.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/models/api/field.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/models/api/field.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/models/api/firmware.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/models/api/firmware.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/models/api/hub.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/models/api/hub.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/models/api/query-list.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/models/api/query-list.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/models/auth/user-profile.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/models/auth/user-profile.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/models/logger/log-entry.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/models/logger/log-entry.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/board-firmware-page/board-firmware.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/board-firmware-page/board-firmware.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/board-firmware-page/board-firmware.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/board-firmware-page/board-firmware.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/board-firmware-page/board-firmware.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/board-firmware-page/board-firmware.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/board-manage-page/board-manage.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/board-manage-page/board-manage.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/board-manage-page/board-manage.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/board-manage-page/board-manage.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/board-manage-page/board-manage.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/board-manage-page/board-manage.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/board-manage-page/board-manage.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/board-manage-page/board-manage.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/board-setup-page/board-setup.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/board-setup-page/board-setup.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/board-setup-page/board-setup.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/board-setup-page/board-setup.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/board-setup-page/board-setup.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/board-setup-page/board-setup.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/board-setup-page/board-setup.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/board-setup-page/board-setup.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/live-data-page/live-data-page.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/live-data-page/live-data-page.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/live-data-page/live-data-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/live-data-page/live-data-page.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/live-data-page/live-data-page.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/live-data-page/live-data-page.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/welcome-page/welcome-page.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/welcome-page/welcome-page.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/welcome-page/welcome-page.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/welcome-page/welcome-page.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/welcome-page/welcome-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/welcome-page/welcome-page.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/welcome-page/welcome-page.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/pages/welcome-page/welcome-page.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/publishers/abstract-log.publisher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/publishers/abstract-log.publisher.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/publishers/log-console.publisher.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/publishers/log-console.publisher.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/services/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/services/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/services/data.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/services/data.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/services/log-publishers.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/services/log-publishers.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/services/logger.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/services/logger.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/store/actions/auth.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/store/actions/auth.actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/store/reducers/auth.reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/store/reducers/auth.reducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/store/reducers/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/store/reducers/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/core/store/selectors/auth.selectors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/core/store/selectors/auth.selectors.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/utils/database.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/utils/database.types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/app/utils/initSupabase.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/app/utils/initSupabase.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/assets/i18n/en-US.json" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/assets/i18n/en-US.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/assets/i18n/it-IT.json" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/assets/i18n/it-IT.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/environments/environment.prod.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/environments/environment.prod.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/environments/environment.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/environments/environment.test.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/environments/environment.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/polyfills.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/polyfills.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/styles.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mqttDashboard/src/test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/mqttDashboard/src/test.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2Sgy4ZyhqMnzuU23nphOOMnsEws" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/federiconatali/Desktop/dashboard/dashboard",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "ts.external.directory.path": "/Users/federiconatali/Desktop/dashboard/dashboard/mqttDashboard/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0491dad4-62dd-43a7-8fcc-6801da3720e6" name="Changes" comment="" />
+      <created>1689582328161</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1689582328161</updated>
+      <workItem from="1689582329195" duration="165000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

@@ -4,29 +4,32 @@
     </div>
     <div class="col-md">
         <div class="btn-group">
-            <button type="button" class="btn btn-sm btn-primary" [routerLink]="['/dashboard']">Back to dashboard
-                <fa-icon icon="table-columns"></fa-icon></button>
+            <button [routerLink]="['/dashboard']" class="btn btn-sm btn-primary" type="button">Back to dashboard
+                <fa-icon icon="table-columns"></fa-icon>
+            </button>
         </div>
     </div>
 </div>
 <div *ngIf="!success && !boardsLookup">
     <h3 *ngIf="hubs.length > 0">List of available Hubs</h3>
-    <table class="table table-striped" *ngIf="hubs.length > 0">
+    <table *ngIf="hubs.length > 0" class="table table-striped">
         <tbody>
-            <tr *ngFor="let hub of hubs">
-                <td>
-                    {{hub.device}}
-                    <br>
-                    <small class="text-muted">MAC: {{hub.id}}</small>
-                    <small *ngIf="isRegistered(hub)" class="text-muted"> - already registered to user</small>
-                </td>
-                <td align="right">
-                    <button class="btn btn-primary" (click)="registerHub(hub)"
-                        *ngIf="!isRegistered(hub)">Register</button>
-                    <button class="btn btn-primary" (click)="setDeviceDiscovery(hub)"
-                        *ngIf="isRegistered(hub)">Open</button>
-                </td>
-            </tr>
+        <tr *ngFor="let hub of hubs">
+            <td>
+                {{hub.device}}
+                <br>
+                <small class="text-muted">MAC: {{hub.id}}</small>
+                <small *ngIf="isRegistered(hub)" class="text-muted"> - already registered to user</small>
+            </td>
+            <td align="right">
+                <button (click)="registerHub(hub)" *ngIf="!isRegistered(hub)"
+                        class="btn btn-primary">Register
+                </button>
+                <button (click)="setDeviceDiscovery(hub)" *ngIf="isRegistered(hub)"
+                        class="btn btn-primary">Open
+                </button>
+            </td>
+        </tr>
         </tbody>
     </table>
     <div *ngIf="hubs.length == 0">
@@ -41,30 +44,34 @@
             <span class="sr-only"></span>
         </div>
         <br>
-        <small class="text-muted">Make sure that your device is in paring mode on the same Wi-Fi network as your Hub.</small>
+        <small class="text-muted">Make sure that your device is in paring mode on the same Wi-Fi network as your
+            Hub.</small>
     </div>
     <h3 *ngIf="boards.length > 0">Available devices</h3>
-    <table class="table table-striped" *ngIf="boards.length > 0">
+    <table *ngIf="boards.length > 0" class="table table-striped">
         <tbody>
-            <tr *ngFor="let board of boards">
-                <td>
-                    <b>{{board.name}}</b>
-                </td>
-                <td align="right">
-                    <button class="btn btn-primary" (click)="selectBoard(board)"
-                        *ngIf="!boardIsMine(board)">Setup</button>
-                    <button class="btn btn-success text-white" *ngIf="boardIsMine(board)">Device already
-                        registered</button>
-                </td>
-            </tr>
+        <tr *ngFor="let board of boards">
+            <td>
+                <b>{{board.name}}</b>
+            </td>
+            <td align="right">
+                <button (click)="selectBoard(board)" *ngIf="!boardIsMine(board)"
+                        class="btn btn-primary">Setup
+                </button>
+                <button *ngIf="boardIsMine(board)" class="btn btn-success text-white">Device already
+                    registered
+                </button>
+            </td>
+        </tr>
         </tbody>
     </table>
 </div>
 <div *ngIf="success">
     <h3>New device added</h3>
     <div class="btn-group">
-        <button type="button" class="btn btn-sm btn-primary" [routerLink]="['/dashboard']">Go back to the dashboard
-            <fa-icon icon="table-columns"></fa-icon></button>
+        <button [routerLink]="['/dashboard']" class="btn btn-sm btn-primary" type="button">Go back to the dashboard
+            <fa-icon icon="table-columns"></fa-icon>
+        </button>
     </div>
 </div>
 <br>

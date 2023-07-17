@@ -1,6 +1,6 @@
-import { Profile } from 'oidc-client';
+import {Profile} from 'oidc-client';
 
-export interface IUserProfile extends Profile{
+export interface IUserProfile extends Profile {
     sub: string;
     unitn_id: string;
     person_id: number;
