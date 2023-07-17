@@ -1,5 +1,23 @@
 # TinyCI Dashboard
 
+## Table of contents
+
+- [TinyCI Dashboard](#tinyci-dashboard)
+- [Description](#description)
+- [Requirements](#requirements)
+- [Technologies](#technologies)
+  * [MQTT broker and AWS](#mqtt-broker-and-aws)
+    + [Why AWS?](#why-aws-)
+- [Project Layout](#project-layout)
+- [How does it work?](#how-does-it-work-)
+  * [Register](#register)
+  * [Manage devices](#manage-devices)
+  * [Live Data](#live-data)
+  * [Device setup by manifacturer](#device-setup-by-manifacturer)
+- [Problems during development](#problems-during-development)
+- [Authors](#authors)
+- [Acknowledgments](#acknowledgments)
+
 # Description
 
 Our Dashboard works as an interface for the user to interact with your Hubs and devices, and a way for our device
